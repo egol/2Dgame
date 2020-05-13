@@ -5,6 +5,7 @@ onready var transition = $Overlays/TransitionColor
 onready var pause_menu = $Interface/PauseMenu
 onready var tree = get_tree()
 
+
 func _ready():
 	$Interface.initialize($LevelLoader/Player)
 	level_loader.initialize()

@@ -27,12 +27,16 @@ layer = -100
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0625, 0.0549316, 0.0549316, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BackgroundFog" type="ColorRect" parent="Background"]
 visible = false
 material = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+color = Color( 0.792157, 0.745098, 0.745098, 1 )
 script = ExtResource( 4 )
 
 [node name="LevelLoader" type="Node" parent="."]
@@ -54,6 +58,7 @@ anchor_bottom = 1.0
 script = ExtResource( 4 )
 
 [node name="TransitionColor" parent="Overlays" instance=ExtResource( 8 )]
+color = Color( 0.462745, 0.298039, 0.298039, 1 )
 
 [node name="Interface" type="CanvasLayer" parent="."]
 pause_mode = 2
