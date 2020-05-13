@@ -36,7 +36,6 @@ visible = false
 material = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.792157, 0.745098, 0.745098, 1 )
 script = ExtResource( 4 )
 
 [node name="LevelLoader" type="Node" parent="."]
@@ -77,6 +76,6 @@ visible = false
 SUB_MENU_PATH = NodePath("")
 
 [node name="LifebarsBuilder" parent="Interface" instance=ExtResource( 13 )]
-[connection signal="loaded" from="LevelLoader" to="Overlays/ForegroundFog" method="_on_LevelLoader_loaded"]
 [connection signal="loaded" from="LevelLoader" to="Background/BackgroundFog" method="_on_LevelLoader_loaded"]
+[connection signal="loaded" from="LevelLoader" to="Overlays/ForegroundFog" method="_on_LevelLoader_loaded"]
 [connection signal="loaded" from="LevelLoader" to="Interface" method="_on_Level_loaded"]
