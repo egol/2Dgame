@@ -14,7 +14,8 @@ func enter():
 
 	var input_direction = get_input_direction()
 	update_look_direction(input_direction)
-	owner.get_node("AnimationPlayer").play("walk")
+	
+#	owner.get_node("AnimationPlayer").play("walk")
 
 func exit():
 	owner.get_node("AnimationPlayer").play("idle")
@@ -27,6 +28,18 @@ func update(delta):
 	if not input_direction:
 		emit_signal("finished", "idle")
 	update_look_direction(input_direction)
+	
+	#print(input_direction)
+	
+	
+	if input_direction.x == -1:
+		owner.get_node("AnimationPlayer").play("Walk_left")
+	elif input_direction.x == 1:
+		owner.get_node("AnimationPlayer").play("Walk_right")
+	elif input_direction.y == -1:
+		owner.get_node("AnimationPlayer").play("Walk_up")
+	elif input_direction.y == 1:
+		owner.get_node("AnimationPlayer").play("Walk_down")
 
 	speed = MAX_RUN_SPEED if Input.is_action_pressed("run") else MAX_WALK_SPEED
 	velocity = input_direction.normalized() * speed

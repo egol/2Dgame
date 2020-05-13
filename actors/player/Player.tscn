@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://actors/player/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://actors/camera/ShakingCamera.tscn" type="PackedScene" id=2]
@@ -27,6 +27,9 @@
 [ext_resource path="res://audio/sfx/step_01.wav" type="AudioStream" id=25]
 [ext_resource path="res://audio/AudioShuffleStepSounds.gd" type="Script" id=26]
 [ext_resource path="res://actors/CoinsCollector.tscn" type="PackedScene" id=27]
+[ext_resource path="res://CharacterLeft.png" type="Texture" id=28]
+[ext_resource path="res://CharacterFront.png" type="Texture" id=29]
+[ext_resource path="res://CharacterBack.png" type="Texture" id=30]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 31.3139
@@ -117,6 +120,238 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Walk_down"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.466516, 1.86089 ),
+"update": 0,
+"values": [ Vector2( 0, -55 ), Vector2( 0, -75 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sfx/Steps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_dust"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BodyPivot/Body:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 30 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Walk_left"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.466516, 1.86089 ),
+"update": 0,
+"values": [ Vector2( 0, -55 ), Vector2( 0, -75 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sfx/Steps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_dust"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BodyPivot/Body:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 28 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Walk_right"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.466516, 1.86089 ),
+"update": 0,
+"values": [ Vector2( 0, -55 ), Vector2( 0, -75 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sfx/Steps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_dust"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BodyPivot/Body:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 16 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Walk_up"
+length = 0.3
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodyPivot/Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 0.466516, 1.86089 ),
+"update": 0,
+"values": [ Vector2( 0, -55 ), Vector2( 0, -75 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sfx/Steps")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_random"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StateMachine/Move")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_dust"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BodyPivot/Body:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 29 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -241,8 +476,8 @@ tracks/3/keys = {
 "values": [  ]
 }
 
-[sub_resource type="Animation" id=6]
-length = 0.01
+[sub_resource type="Animation" id=13]
+resource_name = "idle"
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -252,10 +487,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.466516, 1.86089 ),
 "update": 0,
-"values": [  ]
+"values": [ Vector2( 0, -55 ), Vector2( 0, -58 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -271,51 +506,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray(  ),
 "update": 0,
 "values": [  ]
-}
-
-[sub_resource type="Animation" id=8]
-length = 0.3
-loop = true
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("BodyPivot/Body:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 0.466516, 1.86089 ),
-"update": 0,
-"values": [ Vector2( 0, -55 ), Vector2( 0, -75 ) ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("Sfx/Steps")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "play_random"
-} ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath("StateMachine/Move")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "spawn_dust"
-} ]
 }
 
 [sub_resource type="DynamicFont" id=9]
@@ -368,12 +558,15 @@ script = ExtResource( 12 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/SETUP = SubResource( 2 )
+anims/Walk_down = SubResource( 10 )
+anims/Walk_left = SubResource( 11 )
+anims/Walk_right = SubResource( 8 )
+anims/Walk_up = SubResource( 12 )
 anims/bump = SubResource( 3 )
 anims/die = SubResource( 4 )
 anims/fall = SubResource( 5 )
-anims/idle = SubResource( 6 )
+anims/idle = SubResource( 13 )
 anims/stagger = SubResource( 7 )
-anims/walk = SubResource( 8 )
 
 [node name="Shadow" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.361098 )
@@ -392,9 +585,9 @@ position = Vector2( 110, 0 )
 [node name="Sword" parent="BodyPivot/WeaponPivot/Offset" instance=ExtResource( 15 )]
 
 [node name="Body" type="Sprite" parent="BodyPivot"]
-position = Vector2( 10, -60 )
+position = Vector2( 0, -55.7587 )
 scale = Vector2( 7, 7 )
-texture = ExtResource( 16 )
+texture = ExtResource( 30 )
 
 [node name="StateNameDisplayer" type="Label" parent="BodyPivot"]
 visible = false
