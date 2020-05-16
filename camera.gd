@@ -65,5 +65,5 @@ func shake(duration, frequency, amplitude):
 	set_process(true)
 
 
-func _on_Player_fired_shot(hit_position: Vector2):
-	shake(0.1, 1, 1)
+func _on_Player_fired_shot():
+	shake(0.1, 20, 1)

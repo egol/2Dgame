@@ -1,30 +1,62 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 200
+const ZombieDeathEffect = preload("res://Effects/ZombieDeathEffect.tscn")
 
-onready var raycast = $RayCast2D
+export var ACCELERATION = 300
+export var MAX_SPEED = 50
+export var FRICTION = 600
 
-var player = null
 
-func _ready():
-	add_to_group("zombies")
-	
+enum {
+	IDLE,
+	WANDER,
+	CHASE
+}
+
+var velocity = Vector2.ZERO
+var knockback = Vector2.ZERO
+
+var state = CHASE
+
+onready var sprite = $Sprite
+onready var stats = $Stats
+onready var playerDetectionZone = $PlayerDetectionZone
+onready var hurtbox = $Hurtbox
+
 func _physics_process(delta):
-	if player == null:
-		return
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
+	knockback = move_and_slide(knockback)
 	
-	var vec_to_player = player.global_position - global_position
-	vec_to_player = vec_to_player.normalized()
-	global_rotation = atan2(vec_to_player.y, vec_to_player.x)
-	move_and_slide(vec_to_player * MOVE_SPEED * delta)
-	
-	if raycast.is_colliding():
-		var coll = raycast.get_collider()
-		if coll.name == "Player":
-			coll.kill()
+	match state:
+		IDLE:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			seek_player()
+			
+		WANDER:
+			pass
+			
+		CHASE:
+			var player = playerDetectionZone.player
+			if player != null:
+				var direction = (player.global_position - global_position).normalized()
+				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+			else:
+				state = IDLE
+			sprite.flip_h = velocity.x < 0
+				
+	velocity = move_and_slide(velocity)
+			
+func seek_player():
+	if playerDetectionZone.can_see_player():
+		state = CHASE
 
-func kill():
+func _on_Hurtbox_area_entered(area):
+	stats.health -= area.damage
+	knockback = area.knockback_vector * 90
+	hurtbox.create_hit_effect()
+
+func _on_Stats_no_health():
 	queue_free()
-
-func set_player(p): 
-	player = p
+	var zombieDeathEffect = ZombieDeathEffect.instance()
+	get_parent().add_child(zombieDeathEffect)
+	zombieDeathEffect.global_position = global_position
