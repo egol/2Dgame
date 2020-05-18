@@ -66,4 +66,4 @@ func shake(duration, frequency, amplitude):
 
 
 func _on_Player_fired_shot():
-	shake(0.1, 20, 1)
+	shake(0.2, 30, 1)

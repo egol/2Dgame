@@ -1,17 +1,18 @@
-extends AnimatedSprite
+extends Sprite
 
 export var Effect = preload("res://Effects/BloodEffect.tscn")
 
-func _ready():
-	connect("animation_finished", self, "_on_animation_finished")
-	play("Animate")
-
-func _on_animation_finished():
-	if Effect != null:
-		create_death_effect()
-	queue_free()
+onready var animPlayer = $AnimationPlayer
+	
+func _process(delta):
+	if !animPlayer.is_playing():
+		animPlayer.play("death")
 
 func create_death_effect():
 	var bloodEffect = Effect.instance()
 	bloodEffect.global_position = global_position - Vector2(-5,-9)
-	get_parent().call_deferred("add_child", bloodEffect)
+	get_parent().add_child(bloodEffect)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	queue_free()
