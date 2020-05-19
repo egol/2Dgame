@@ -401,8 +401,9 @@ position = Vector2( 0, -7 )
 
 [node name="sprite" type="Sprite" parent="Gun"]
 position = Vector2( 13, 0 )
+rotation = -0.588176
 texture = ExtResource( 3 )
-offset = Vector2( 0, -2 )
+offset = Vector2( 0, -1 )
 
 [node name="gunbarrel" type="Node2D" parent="Gun"]
 position = Vector2( 25, -0.539 )
@@ -414,7 +415,7 @@ anims/Shooting = SubResource( 1 )
 position = Vector2( 1, -8 )
 texture = ExtResource( 1 )
 hframes = 60
-frame = 59
+frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 2 )
@@ -436,7 +437,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 34 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( -0.0464088, -0.130952 )
-parameters/Run/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0.00438595, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708

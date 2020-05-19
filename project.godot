@@ -21,6 +21,7 @@ run/main_scene="res://World.tscn"
 [autoload]
 
 PlayerStats="*res://Player/PlayerStats.tscn"
+Wind="*res://World/Wind.tscn"
 
 [display]
 

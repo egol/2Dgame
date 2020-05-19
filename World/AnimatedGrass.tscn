@@ -1,0 +1,160 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://World/AnimatedGrass.gd" type="Script" id=1]
+[ext_resource path="res://World/grass5.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=52]
+resource_name = "Idle"
+loop = true
+
+[sub_resource type="Animation" id=70]
+resource_name = "WindDown"
+length = 3.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.7, 2.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 5, -8 ), Vector2( 3, -8 ), Vector2( 5, -8 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=71]
+resource_name = "WindLeft"
+length = 3.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.7, 2.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 5, -8 ), Vector2( 3, -8 ), Vector2( 5, -8 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "WindRight"
+length = 3.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.7, 2.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 5, -8 ), Vector2( 3, -8 ), Vector2( 5, -8 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="Animation" id=72]
+resource_name = "WindUp"
+length = 3.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.7, 2.3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 5, -8 ), Vector2( 3, -8 ), Vector2( 5, -8 ), Vector2( 0, -8 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=60]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=61]
+blend_point_0/node = SubResource( 57 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 58 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 59 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 60 )
+blend_point_3/pos = Vector2( 0, -0.9 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "WindLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "WindDown"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "WindRight"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "WindUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=66]
+blend_point_0/node = SubResource( 62 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 63 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 64 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 65 )
+blend_point_3/pos = Vector2( 0, -1 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+
+[sub_resource type="AnimationNodeStateMachine" id=69]
+states/Idle/node = SubResource( 61 )
+states/Idle/position = Vector2( 512, 125 )
+states/Wind/node = SubResource( 66 )
+states/Wind/position = Vector2( 740, 125 )
+transitions = [ "Idle", "Wind", SubResource( 67 ), "Wind", "Idle", SubResource( 68 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -198, -121 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=19]
+
+[node name="AnimatedGrass" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Node2D" type="Sprite" parent="."]
+position = Vector2( 0, -8 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 52 )
+anims/WindDown = SubResource( 70 )
+anims/WindLeft = SubResource( 71 )
+anims/WindRight = SubResource( 55 )
+anims/WindUp = SubResource( 72 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 69 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 19 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Wind/blend_position = Vector2( 0, -0.009009 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

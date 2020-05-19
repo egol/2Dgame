@@ -17,7 +17,7 @@ var bullet = preload("res://Player/Bullet.tscn")
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
 
-signal fired_shot
+#signal fired_shot
 
 export var shoot_effect: PackedScene
 export var bullet_speed = 1000
@@ -69,7 +69,7 @@ func _process(delta):
 		
 		animationPlayer.play("Shooting")
 		
-		emit_signal("fired_shot")
+#		emit_signal("fired_shot")
 		
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
@@ -82,6 +82,8 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 	
 	if input_vector != Vector2.ZERO:
+		Wind.windDirection = input_vector
+#		print(Wind.windDirection)
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		
