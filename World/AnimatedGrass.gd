@@ -17,32 +17,78 @@ func _ready():
 #	print(rng.get_seed())
 #	seed(r)
 
-	var a1 = animationPlayer.get_animation("WindRight").duplicate()
-	animationPlayer.remove_animation("WindRight")
-	a1.track_set_key_value(0, 1, Vector2(rng.randi_range(3, 5), yoffset))
-	a1.track_set_key_value(0, 2, Vector2(rng.randi_range(3, 5), yoffset))
-	a1.track_set_key_value(0, 3, Vector2(rng.randi_range(3, 5), yoffset))
+	var a1 = animationPlayer.get_animation("Wind").duplicate()
+	
+	var t = rng.randf_range(1, 3)
+	
+	a1.track_set_key_value(0, 0, Vector2(t, yoffset))
+	a1.track_set_key_value(0, 1, Vector2(rng.randf_range(4, 6), yoffset))
+	a1.track_set_key_value(0, 2, Vector2(t, yoffset))
+	
+	t = rng.randf_range(5, 8)
+	
+	a1.track_set_key_value(1, 0, t)
+	a1.track_set_key_value(1, 1, rng.randf_range(13, 20))
+	a1.track_set_key_value(1, 2, t)
+	
+	a1.track_set_key_time(0, 1, rng.randf_range(0.3, 1.7))
+	
 	animationPlayer.add_animation("WindRight", a1)
 	
-	var a2 = animationPlayer.get_animation("WindLeft").duplicate()
-	animationPlayer.remove_animation("WindLeft")
-	a2.track_set_key_value(0, 1, Vector2(rng.randi_range(-3, -5), yoffset))
-	a2.track_set_key_value(0, 2, Vector2(rng.randi_range(-3, -5), yoffset))
-	a2.track_set_key_value(0, 3, Vector2(rng.randi_range(-3, -5), yoffset))
+	
+	var a2 = animationPlayer.get_animation("Wind").duplicate()
+	
+	t = rng.randf_range(-1, -3)
+	
+	a2.track_set_key_value(0, 0, Vector2(t, yoffset))
+	a2.track_set_key_value(0, 1, Vector2(rng.randf_range(-4, -6), yoffset))
+	a2.track_set_key_value(0, 2, Vector2(t, yoffset))
+	
+	t = rng.randf_range(-5, -8)
+	
+	a2.track_set_key_value(1, 0, t)
+	a2.track_set_key_value(1, 1, rng.randf_range(-13, -20))
+	a2.track_set_key_value(1, 2, t)
+	
+	a2.track_set_key_time(0, 1, rng.randf_range(0.3, 1.7))
+	
 	animationPlayer.add_animation("WindLeft", a2)
 	
-	var a3 = animationPlayer.get_animation("WindDown").duplicate()
-	animationPlayer.remove_animation("WindDown")
-	a3.track_set_key_value(0, 1, Vector2(0, rng.randi_range(3, 5)+yoffset))
-	a3.track_set_key_value(0, 2, Vector2(0, rng.randi_range(3, 5)+yoffset))
-	a3.track_set_key_value(0, 3, Vector2(0, rng.randi_range(3, 5)+yoffset))
-	animationPlayer.add_animation("WindDown", a3)
 	
-	var a4 = animationPlayer.get_animation("WindUp").duplicate()
-	animationPlayer.remove_animation("WindUp")
-	a4.track_set_key_value(0, 1, Vector2(0, rng.randi_range(-3, -5)+yoffset))
-	a4.track_set_key_value(0, 2, Vector2(0, rng.randi_range(-3, -5)+yoffset))
-	a4.track_set_key_value(0, 3, Vector2(0, rng.randi_range(-3, -5)+yoffset))
+	var a3 = animationPlayer.get_animation("Wind").duplicate()
+	
+	t = rng.randf_range(1, 3)
+	
+	a3.track_set_key_value(0, 0, Vector2(0, t-yoffset))
+	a3.track_set_key_value(0, 1, Vector2(0, rng.randf_range(4, 6)-yoffset))
+	a3.track_set_key_value(0, 2, Vector2(0, t-yoffset))
+	
+	t = Vector2(1, rng.randf_range(1, 1.1))
+	
+	a3.track_set_key_value(1, 0, t)
+	a3.track_set_key_value(1, 1, Vector2(1, rng.randf_range(1, 1.4)))
+	a3.track_set_key_value(1, 2, t)
+	
+	a3.track_set_key_time(0, 1, rng.randf_range(0.3, 1.7))
+	
+	animationPlayer.add_animation("WindDown", a3)
+
+	var a4 = animationPlayer.get_animation("Wind").duplicate()
+	
+	t = rng.randf_range(-1, -3)
+	
+	a4.track_set_key_value(0, 0, Vector2(0, t-yoffset))
+	a4.track_set_key_value(0, 1, Vector2(0, rng.randf_range(-4, -6)-yoffset))
+	a4.track_set_key_value(0, 2, Vector2(0, t-yoffset))
+	
+	t = Vector2(1, rng.randf_range(1, 0.9))
+	
+	a4.track_set_key_value(1, 0, t)
+	a4.track_set_key_value(1, 1, Vector2(1, rng.randf_range(1, 0.6)))
+	a4.track_set_key_value(1, 2, t)
+	
+	a4.track_set_key_time(0, 1, rng.randf_range(0.3, 1.7))
+	
 	animationPlayer.add_animation("WindUp", a4)
 	
 	

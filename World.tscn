@@ -10,7 +10,7 @@
 [ext_resource path="res://World/mud.png" type="Texture" id=8]
 [ext_resource path="res://camera.gd" type="Script" id=9]
 [ext_resource path="res://World/Crate.tscn" type="PackedScene" id=10]
-[ext_resource path="res://World/GrassBackground.png" type="Texture" id=11]
+[ext_resource path="res://World/grass4.png" type="Texture" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -606,7 +606,7 @@ position = Vector2( 100, 75 )
 [node name="GrassSpawner" type="Node2D" parent="YSort"]
 position = Vector2( 384, -8 )
 script = ExtResource( 3 )
-width = 10
+width = 20
 height = 20
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
