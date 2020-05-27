@@ -9,7 +9,9 @@ var velocity = Vector2.ZERO
 
 enum {
 	MOVE,
-	ROLL
+	ROLL,
+	INVENTORY,
+	TALK
 }
 
 var state = MOVE
@@ -22,6 +24,8 @@ var stats = PlayerStats
 export var shoot_effect: PackedScene
 export var bullet_speed = 1000
 export var fire_rate = 0.1
+var in_inventory = false
+var talking = false
 
 var can_fire = true
 
@@ -47,6 +51,12 @@ func _physics_process(delta):
 			
 		ROLL: 
 			roll_state(delta)
+			
+		INVENTORY: 
+			inventory_state(delta)
+			
+		TALK:
+			talk_state()
 			
 			
 func _process(delta):
@@ -74,6 +84,27 @@ func _process(delta):
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
 		can_fire = true
+		
+func inventory_state(delta):
+	var inv = get_tree().get_root().find_node("Inventory", true, false)
+	
+	if in_inventory:
+		inv.visible = true
+	else:
+		inv.visible = false
+		state = MOVE
+		
+	if Input.is_action_just_pressed("open_inv"):
+		in_inventory = !in_inventory
+		
+func talk_state():
+	talking = false
+	state = MOVE
+#	if !talking:
+#		state = MOVE
+#	if Input.is_action_just_pressed("talk"):
+#		talking = !talking
+	
 	
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -86,6 +117,8 @@ func move_state(delta):
 #		print(Wind.windDirection)
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
+		animationTree.set("parameters/Roll/blend_position", input_vector)
+		roll_vector = input_vector
 		
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -93,9 +126,9 @@ func move_state(delta):
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
-	var direction = Vector2(cos(gunbarrel.global_rotation), sin(gunbarrel.global_rotation))
-	animationTree.set("parameters/Roll/blend_position", direction)
-	roll_vector = direction
+#	var direction = Vector2(cos(gunbarrel.global_rotation), sin(gunbarrel.global_rotation))
+#	animationTree.set("parameters/Roll/blend_position", direction)
+#	roll_vector = direction
 	
 	
 	move()
@@ -107,6 +140,12 @@ func move_state(delta):
 		
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
+	if Input.is_action_just_pressed("open_inv"):
+		in_inventory = !in_inventory
+		state = INVENTORY
+	if Input.is_action_just_pressed("talk"):
+		talking = !talking
+		state = TALK
 		
 		
 func roll_state(delta):

@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://NPCbase.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/Tairo.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="NPCbase" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 2 )]
+
+[node name="ToolTip" type="RichTextLabel" parent="."]
+visible = false
+margin_top = 1.0
+margin_right = 94.0
+margin_bottom = 41.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_text = "F"
+text = "F"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="PlayerDetectionZone" to="." method="_on_PlayerDetectionZone_body_entered"]
+
+[editable path="PlayerDetectionZone"]

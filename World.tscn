@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=69 format=2]
 
 [ext_resource path="res://World/bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://camera.gd" type="Script" id=9]
 [ext_resource path="res://World/Crate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/grass4.png" type="Texture" id=11]
+[ext_resource path="res://dialogue/DialogueSystem.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Inventory/Inventory.tscn" type="PackedScene" id=13]
+[ext_resource path="res://NPC/NPCbase.tscn" type="PackedScene" id=14]
+[ext_resource path="res://NPC/guy.png" type="Texture" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -511,6 +515,13 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 0/z_index = 0
 
+[sub_resource type="CapsuleShape2D" id=52]
+radius = 4.0
+height = 6.0
+
+[sub_resource type="CircleShape2D" id=53]
+radius = 17.0294
+
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
@@ -541,15 +552,17 @@ format = 1
 tile_data = PoolIntArray( -1, 0, 0, -65536, 0, 1, -65535, 0, 1, -65534, 0, 1, -65533, 0, 2, -65529, 0, 0, -65528, 0, 1, -65527, 0, 1, -65526, 0, 2, 65535, 0, 65536, 0, 0, 65537, 1, 0, 65541, 2, 0, 131073, 3, 0, 131074, 7, 0, 131072, 8, 0, 131073, 9, 0, 65542, 10, 0, 65538, 131071, 0, 65536, 65536, 0, 65537, 65537, 0, 65538, 65545, 0, 131072, 65546, 0, 131074, 196607, 0, 131072, 131072, 0, 131073, 131073, 0, 131074, 196618, 0, 3, 327679, 0, 0, 262144, 0, 1, 262145, 0, 2, 262153, 0, 0, 262154, 0, 131079, 393215, 0, 65536, 327680, 0, 65537, 327681, 0, 65538, 327689, 0, 65536, 327690, 0, 65538, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 131074, 393225, 0, 131072, 393226, 0, 131074 )
 
 [node name="camera" type="Camera2D" parent="."]
-position = Vector2( 176, 64 )
+position = Vector2( 176.486, 64.4854 )
 current = true
+zoom = Vector2( 0.2, 0.2 )
 process_mode = 0
 limit_left = -200
 limit_top = -200
-limit_right = 600
-limit_bottom = 600
+limit_right = 1049
+limit_bottom = 596
 limit_smoothed = true
 smoothing_enabled = true
+editor_draw_limits = true
 script = ExtResource( 9 )
 
 [node name="YSort" type="YSort" parent="."]
@@ -558,6 +571,7 @@ script = ExtResource( 9 )
 position = Vector2( 176, 64 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+position = Vector2( 0.486343, 0.48539 )
 remote_path = NodePath("../../../camera")
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 6 )]
@@ -574,6 +588,31 @@ position = Vector2( 91, 162 )
 
 [node name="Zombie5" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 232, 162 )
+
+[node name="NPCbase" parent="YSort" instance=ExtResource( 14 )]
+position = Vector2( 144, -56 )
+
+[node name="Sprite" parent="YSort/NPCbase" index="0"]
+position = Vector2( 0, -9 )
+texture = ExtResource( 15 )
+
+[node name="CollisionShape2D" parent="YSort/NPCbase" index="1"]
+position = Vector2( 0, 3 )
+rotation = 1.5708
+shape = SubResource( 52 )
+
+[node name="PlayerDetectionZone" parent="YSort/NPCbase" index="3"]
+position = Vector2( 0, 3 )
+
+[node name="CollisionShape2D" parent="YSort/NPCbase/PlayerDetectionZone" index="0"]
+shape = SubResource( 53 )
+
+[node name="ToolTip" parent="YSort/NPCbase" index="4"]
+visible = true
+margin_left = -1.0
+margin_top = -43.0
+margin_right = 93.0
+margin_bottom = -3.0
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -612,3 +651,20 @@ height = 20
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 7 )]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 92.0
+margin_bottom = 19.0
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
+
+[node name="Dialogue" parent="CanvasLayer" instance=ExtResource( 12 )]
+margin_left = 446.0
+margin_top = 510.0
+margin_right = -370.0
+margin_bottom = -42.0
+
+[editable path="YSort/NPCbase"]
+
+[editable path="YSort/NPCbase/PlayerDetectionZone"]

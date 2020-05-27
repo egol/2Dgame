@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://NPC/Face-1.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends RichTextLabel
+
+# Example script to demonstrate how to use twison helper.
+# Please attach this script to RichTextLabel with bbcodes enabled.
+# Then, attach meta_clicked(...) signal to _on_meta_clicked(...) function.
+# This script expects the helper script to be located at
+# res://modules/twison-godot/twison_helper.gd
+
+#signal finished_dialogue
+
+onready var twison = preload(\"res://Modules/Dialogue/twison_helper.gd\")
+onready var Twison = twison.new()
+
+export(String, FILE, \"*.json\") var scriptPath = \"res://dialogue/data.json\"
+export var neutralFacePath = \"res://NPC/Face-1.png\"
+
+func _ready():
+	var face = get_parent().find_node(\"TextureRect\", true, false)
+	face.texture = load(neutralFacePath)
+#	# Initialize the script
+#	Twison.parse_file(scriptPath, funcref(Twison, \"link_filter_bbcode\"))
+#
+#	# Print some info about the story
+##	print(\"Story name: \", Twison.get_story_name())
+##	print(\"Passages: \")
+##	for passage in Twison.get_passage_names():
+##		print(\"\\t\"+passage)
+##
+##	print(\"There are also following tags: \")
+##	for tag in Twison.get_all_tags():
+##		print(tag)
+##		tag = Twison.get_passages_tagged_with(tag)
+##		print(\"Passages marked with this tag (pids): \", tag)
+#
+## Show first passage in our RichTextLabel 
+#	show_passage(Twison.get_passage(Twison.get_starting_node()))	
+	
+func initialize():
+	# Initialize the script
+	Twison.parse_file(scriptPath, funcref(Twison, \"link_filter_bbcode\"))
+	# Show first passage in our RichTextLabel 
+	show_passage(Twison.get_passage(Twison.get_starting_node()))	
+	
+func show_passage(passage: Dictionary):
+	set_bbcode(passage[\"text\"])
+
+func _on_meta_clicked(meta):
+#	print(\"\\nLink clicked: \", meta)
+	var next_chapter = Twison.get_passage_by_name(meta)
+	
+#	if !next_chapter.has(\"links\"):
+#		emit_signal(\"finished_dialogue\")
+	
+#	if (next_chapter.has(\"links\")):
+#		print(\"Next passage has following links:\")
+#		for i in Twison.get_passage_links(next_chapter):
+#			print(\"\\t\"+i)
+	
+	show_passage(next_chapter)
+"
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -816.0
+margin_bottom = -552.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 464.0
+margin_bottom = 168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -232.0
+margin_top = -84.0
+margin_right = 232.0
+margin_bottom = 84.0
+bbcode_enabled = true
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="."]
+margin_left = -176.0
+margin_right = -8.0
+margin_bottom = 168.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -168.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 160.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="meta_clicked" from="Node2D" to="Node2D" method="_on_meta_clicked"]
