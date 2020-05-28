@@ -3,17 +3,17 @@ extends Node2D
 const ICON_PATH = "res://Inventory/assets/"
 
 const ITEMS = {
-	"sword": {
-		"asset": ICON_PATH + "sword.png",
-		"slot": "MAIN_HAND"
-	},
-	"breastplate": {
-		"asset": ICON_PATH + "breastplate.png",
+	"ChestRig": {
+		"asset": ICON_PATH + "Rig.png",
 		"slot": "CHEST"
 	},
-	"potato": {
-		"asset": ICON_PATH + "potato.png",
-		"slot": "MAIN_HAND"
+	"AI2": {
+		"asset": ICON_PATH + "AI2.png",
+		"slot": "NONE"
+	},
+	"stick": {
+		"asset": ICON_PATH + "stick.png",
+		"slot": "WEAPON"
 	},
 	"error": {
 		"asset": ICON_PATH + "error.png",

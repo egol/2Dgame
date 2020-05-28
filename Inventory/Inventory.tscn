@@ -68,3 +68,6 @@ margin_right = 26.0
 margin_bottom = 111.4
 texture = ExtResource( 3 )
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

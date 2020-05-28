@@ -62,7 +62,7 @@ func _physics_process(delta):
 func _process(delta):
 	var look_vec = get_global_mouse_position() - global_position
 	rotate_pointer(look_vec)
-	if Input.is_action_pressed("shoot") and can_fire:
+	if Input.is_action_pressed("shoot") and can_fire and state != INVENTORY and state != ROLL:
 		var bullet_instance = bullet.instance()
 		var bulletHitbox = bullet_instance.get_child(2)
 		bullet_instance.position = gunbarrel.get_global_position()
