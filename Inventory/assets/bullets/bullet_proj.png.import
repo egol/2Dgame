@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/AI2_item.png-f16031b7fcd838218467a41551948ecc.stex"
+path="res://.import/bullet_proj.png-cfd506d9f3091f4b85d935181cafca87.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Inventory/assets/AI2_item.png"
-dest_files=[ "res://.import/AI2_item.png-f16031b7fcd838218467a41551948ecc.stex" ]
+source_file="res://Inventory/assets/bullets/bullet_proj.png"
+dest_files=[ "res://.import/bullet_proj.png-cfd506d9f3091f4b85d935181cafca87.stex" ]
 
 [params]
 

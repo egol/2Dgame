@@ -37,6 +37,7 @@ onready var gun = $Gun
 onready var gunbarrel = $Gun/gunbarrel
 onready var gunsprite = $Gun/sprite
 onready var hurtbox = $Hurtbox
+onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
@@ -69,6 +70,7 @@ func _process(delta):
 		bullet_instance.rotation_degrees = gun.global_rotation_degrees
 		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(gun.rotation))
 		bulletHitbox.knockback_vector = roll_vector
+		
 		
 		get_tree().get_root().add_child(bullet_instance)
 		

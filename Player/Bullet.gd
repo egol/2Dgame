@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var explosion = preload("res://Player/HitEffect.tscn")
+onready var sprite = $Sprite
 
 func _on_Bullet_body_entered(body):
 	var explosion_instance = explosion.instance()

@@ -611,10 +611,10 @@ shape = SubResource( 53 )
 
 [node name="ToolTip" parent="YSort/NPCbase" index="4"]
 visible = true
-margin_left = -1.0
-margin_top = -43.0
-margin_right = 93.0
-margin_bottom = -3.0
+margin_left = -3.0
+margin_top = -44.0
+margin_right = 91.0
+margin_bottom = -4.0
 
 [node name="Bushes" type="YSort" parent="YSort"]
 

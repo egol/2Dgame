@@ -24,6 +24,7 @@ func _ready():
 			
 			
 func insert_item(item):
+	
 	# set item_pos to the center of the top-left cell
 	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
 	
@@ -33,15 +34,22 @@ func insert_item(item):
 	if is_grid_space_available(g_pos, item_size_in_cells):
 		set_grid_space(g_pos, item_size_in_cells, true)
 		item.rect_global_position = rect_global_position + Vector2(g_pos.x, g_pos.y) * cell_size
+		#checked
 		items.append(item)
 		return true
 	else:
 		return false
 
+func get_item(pos):
+	var item = get_item_under_pos(pos)
+	if item == null:
+		return null
+	
+	return item
 
 func grab_item(pos):
 	var item = get_item_under_pos(pos)
-	if item == null:
+	if item == null and !is_instance_valid(item):
 		return null
 		
 	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
@@ -70,9 +78,11 @@ func update_item(item):
 	
 	
 func get_item_under_pos(pos):
+	#checked
 	for item in items:
-		if item.get_global_rect().has_point(pos):
-			return item
+		if is_instance_valid(item) and item.has_method("update_display"):
+			if item.get_global_rect().has_point(pos):
+				return item
 	return null
 	
 	
@@ -118,13 +128,23 @@ func pos_to_grid_coord(pos, item):
 func get_grid_size(item):
 # return the item's size in units of cell_size
 	var results = {}
-	var s = item.rect_size
-	var r = item.rect_rotation
-	if r == 90 or r == 270:
-		s.x = item.rect_size.y
-		s.y = item.rect_size.x
-	results.width = clamp(int(s.x / cell_size), 1, 500)
-	results.height = clamp(int(s.y / cell_size), 1, 500)
+	
+	if item.get_child(0) != null:
+		var s = item.rect_size
+		var r = item.rect_rotation
+		if r == 90:
+			s.x = item.rect_size.y
+			s.y = item.rect_size.x
+		results.width = clamp(int(s.x / cell_size), 1, 500)
+		results.height = clamp(int(s.y / cell_size), 1, 500)
+	else:
+		var s = item.rect_size
+		var r = item.rect_rotation
+		if r == 90:
+			s.x = item.rect_size.y
+			s.y = item.rect_size.x
+		results.width = clamp(int(s.x / cell_size), 1, 500)
+		results.height = clamp(int(s.y / cell_size), 1, 500)
 	return results
 	
 	
@@ -136,4 +156,3 @@ func insert_item_at_first_available_spot(item):
 				if insert_item(item):
 					return true
 	return false
-

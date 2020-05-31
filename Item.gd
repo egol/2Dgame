@@ -10,7 +10,7 @@ export var size = 1
 onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
 
 func _ready():
-	var s = ItemDB.get_item(item_name)["asset"]
+	var s = ItemDB.get_item(item_name)["value"]["asset"]
 	
 #	print(s.insert(s.length()-4, "_item"))
 #	animation.play("floating")
