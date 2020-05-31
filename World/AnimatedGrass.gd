@@ -19,10 +19,10 @@ func _ready():
 
 	var a1 = animationPlayer.get_animation("Wind").duplicate()
 	
-	var t = rng.randf_range(1, 3)
+	var t = rng.randf_range(0, 0)
 	
 	a1.track_set_key_value(0, 0, Vector2(t, yoffset))
-	a1.track_set_key_value(0, 1, Vector2(rng.randf_range(4, 6), yoffset))
+	a1.track_set_key_value(0, 1, Vector2(rng.randf_range(0, 2), yoffset))
 	a1.track_set_key_value(0, 2, Vector2(t, yoffset))
 	
 	t = rng.randf_range(5, 8)
@@ -38,10 +38,10 @@ func _ready():
 	
 	var a2 = animationPlayer.get_animation("Wind").duplicate()
 	
-	t = rng.randf_range(-1, -3)
+	t = rng.randf_range(0, 0)
 	
 	a2.track_set_key_value(0, 0, Vector2(t, yoffset))
-	a2.track_set_key_value(0, 1, Vector2(rng.randf_range(-4, -6), yoffset))
+	a2.track_set_key_value(0, 1, Vector2(rng.randf_range(0, -2), yoffset))
 	a2.track_set_key_value(0, 2, Vector2(t, yoffset))
 	
 	t = rng.randf_range(-5, -8)
@@ -60,7 +60,7 @@ func _ready():
 	t = rng.randf_range(1, 3)
 	
 #	a3.track_set_key_value(0, 0, Vector2(0, yoffset))
-	a3.track_set_key_value(0, 1, Vector2(0, rng.randf_range(1, 2)-yoffset))
+	a3.track_set_key_value(0, 1, Vector2(0, rng.randf_range(0, 1)+yoffset))
 #	a3.track_set_key_value(0, 2, Vector2(0, yoffset))
 	
 	t = Vector2(1, rng.randf_range(1, 1))
@@ -78,7 +78,7 @@ func _ready():
 	t = rng.randf_range(-1, -3)
 	
 #	a4.track_set_key_value(0, 0, Vector2(0, yoffset))
-	a4.track_set_key_value(0, 1, Vector2(0, rng.randf_range(-1, -2)-yoffset))
+	a4.track_set_key_value(0, 1, Vector2(0, rng.randf_range(0, -1)+yoffset))
 #	a4.track_set_key_value(0, 2, Vector2(0, yoffset))
 	
 	t = Vector2(1, rng.randf_range(1, 1))

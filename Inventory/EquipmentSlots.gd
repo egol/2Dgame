@@ -16,7 +16,7 @@ func insert_item(item):
 	if slot == null:
 		return false
 	print("slot name:" + slot.name)
-	var item_slot = ItemDB.get_item(item.get_meta("id"))["slot"]
+	var item_slot = ItemDB.get_item(item.get_meta("id"))["value"]["slot"]
 	if item_slot != slot.name:
 		return false
 	if items[item_slot] != null:
@@ -34,7 +34,7 @@ func grab_item(pos):
 	if !item:
 		return null
 		
-	var item_slot = ItemDB.get_item(item.get_meta("id"))["slot"]
+	var item_slot = ItemDB.get_item(item.get_meta("id"))["value"]["slot"]
 	items[item_slot] = null
 	return item
 	

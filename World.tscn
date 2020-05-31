@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://World/bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Inventory/Inventory.tscn" type="PackedScene" id=13]
 [ext_resource path="res://NPC/NPCbase.tscn" type="PackedScene" id=14]
 [ext_resource path="res://NPC/guy.png" type="Texture" id=15]
+[ext_resource path="res://Item.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -525,11 +526,12 @@ radius = 17.0294
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( -72, -64 )
+position = Vector2( -83, -264 )
+scale = Vector2( 1.02446, 1.02446 )
 texture = ExtResource( 11 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 928, 368 )
+region_rect = Rect2( 0, 0, 928.855, 700 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -575,19 +577,19 @@ position = Vector2( 0.486343, 0.48539 )
 remote_path = NodePath("../../../camera")
 
 [node name="Zombie" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 120, 104 )
+position = Vector2( 142, 233 )
 
 [node name="Zombie2" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 169, 158 )
+position = Vector2( 234, 246 )
 
 [node name="Zombie3" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 50, 106 )
+position = Vector2( 141, 289 )
 
 [node name="Zombie4" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 91, 162 )
+position = Vector2( 86, 220 )
 
 [node name="Zombie5" parent="YSort" instance=ExtResource( 6 )]
-position = Vector2( 232, 162 )
+position = Vector2( 193, 215 )
 
 [node name="NPCbase" parent="YSort" instance=ExtResource( 14 )]
 position = Vector2( 144, -56 )
@@ -609,10 +611,10 @@ shape = SubResource( 53 )
 
 [node name="ToolTip" parent="YSort/NPCbase" index="4"]
 visible = true
-margin_left = -1.0
-margin_top = -43.0
-margin_right = 93.0
-margin_bottom = -3.0
+margin_left = -3.0
+margin_top = -44.0
+margin_right = 91.0
+margin_bottom = -4.0
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -647,6 +649,28 @@ position = Vector2( 384, -8 )
 script = ExtResource( 3 )
 width = 20
 height = 20
+
+[node name="Items" type="YSort" parent="YSort"]
+
+[node name="AI2" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 190, -36 )
+item_name = "AI2"
+
+[node name="AI3" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 209, -48 )
+item_name = "AI2"
+
+[node name="AI4" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 189, -57 )
+item_name = "AI2"
+
+[node name="AI5" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 210, -69 )
+item_name = "AI2"
+
+[node name="Rig" parent="YSort/Items" instance=ExtResource( 16 )]
+position = Vector2( 169, -43 )
+item_name = "ChestRig"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

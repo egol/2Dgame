@@ -16,55 +16,274 @@ __meta__ = {
 }
 
 [node name="InventoryBase" type="Panel" parent="."]
-margin_left = -446.0
-margin_top = -198.0
-margin_right = 361.0
-margin_bottom = 260.0
+margin_left = -599.0
+margin_top = -292.0
+margin_right = 605.0
+margin_bottom = 291.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EquipmentSlots" type="Panel" parent="."]
 self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
-margin_left = 124.0
-margin_top = -166.0
-margin_right = 335.0
-margin_bottom = 219.0
+margin_left = -578.0
+margin_top = -267.0
+margin_right = -193.0
+margin_bottom = 247.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HEAD" type="Panel" parent="EquipmentSlots"]
-margin_left = 124.4
-margin_top = 14.0
-margin_right = 192.4
-margin_bottom = 62.0
+margin_left = 116.0
+margin_top = 42.0
+margin_right = 192.0
+margin_bottom = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HEAD2" type="Panel" parent="EquipmentSlots"]
+margin_left = 209.0
+margin_top = 42.0
+margin_right = 285.0
+margin_bottom = 118.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CHEST" type="Panel" parent="EquipmentSlots"]
-margin_left = 112.0
-margin_top = 86.0
-margin_right = 202.0
-margin_bottom = 209.0
+margin_left = 93.0
+margin_top = 128.0
+margin_right = 217.0
+margin_bottom = 292.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LEGS" type="Panel" parent="EquipmentSlots"]
-margin_left = 112.0
-margin_top = 229.15
-margin_right = 202.0
-margin_bottom = 352.15
+margin_left = 93.0
+margin_top = 303.0
+margin_right = 217.0
+margin_bottom = 448.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MAIN_HAND" type="Panel" parent="EquipmentSlots"]
-margin_left = 14.0
-margin_top = 96.0
-margin_right = 94.0
-margin_bottom = 296.0
+margin_left = 8.0
+margin_top = 128.0
+margin_right = 83.0
+margin_bottom = 292.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="GridBackPack" type="TextureRect" parent="."]
+[node name="MAIN_HAND2" type="Panel" parent="EquipmentSlots"]
+margin_left = 227.0
+margin_top = 128.0
+margin_right = 371.0
+margin_bottom = 196.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MAIN_HAND4" type="Panel" parent="EquipmentSlots"]
+margin_left = 228.0
+margin_top = 329.0
+margin_right = 299.0
+margin_bottom = 400.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MAIN_HAND5" type="Panel" parent="EquipmentSlots"]
+margin_left = 227.0
+margin_top = 248.0
+margin_right = 298.0
+margin_bottom = 319.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = -172.0
+margin_top = -266.0
+margin_right = 329.0
+margin_bottom = 234.0
+rect_clip_content = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_bottom = 4000.0
+custom_constants/separation = 400
+
+[node name="Control11" type="Control" parent="ScrollContainer/VBoxContainer"]
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control11"]
+self_modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+margin_left = 9.0
+margin_top = 6.0
+margin_right = 99.0
+margin_bottom = 96.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridBackPack" type="TextureRect" parent="ScrollContainer/VBoxContainer/Control11"]
 self_modulate = Color( 0.300781, 0.274933, 0.274933, 1 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -422.0
-margin_top = -144.6
-margin_right = 26.0
-margin_bottom = 111.4
+margin_left = 8.0
+margin_top = 104.0
+margin_right = 308.0
+margin_bottom = 404.0
 texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 400.0
+margin_bottom = 400.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 800.0
+margin_bottom = 800.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control2"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 1200.0
+margin_bottom = 1200.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control3"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 1600.0
+margin_bottom = 1600.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control4"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control5" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 2000.0
+margin_bottom = 2000.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control5"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control6" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 2400.0
+margin_bottom = 2400.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control6"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control7" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 2800.0
+margin_bottom = 2800.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control7"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control8" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 3200.0
+margin_bottom = 3200.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control8"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control9" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 3600.0
+margin_bottom = 3600.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control9"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control10" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 4000.0
+margin_bottom = 4000.0
+
+[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control10"]
+self_modulate = Color( 0.776471, 0, 0, 1 )
+margin_left = 58.0
+margin_top = 13.0
+margin_right = 98.0
+margin_bottom = 53.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="ScrollContainer/VBoxContainer/Control11/GridBackPack" to="." method="_on_GridBackPack_gui_input"]

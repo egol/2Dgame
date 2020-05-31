@@ -36,7 +36,7 @@ tracks/1/keys = {
 "values": [ -9.0, -20.0, -9.0 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=3]
 resource_name = "Wind1"
 length = 4.0
 loop = true
@@ -65,14 +65,8 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=4]
 resource_name = "Wind2"
-
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "Idle"
-
-[sub_resource type="AnimationNodeAnimation" id=4]
-animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
 animation = "Idle"
@@ -80,54 +74,60 @@ animation = "Idle"
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=7]
-blend_point_0/node = SubResource( 3 )
-blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 4 )
-blend_point_1/pos = Vector2( 0, 1 )
-blend_point_2/node = SubResource( 5 )
-blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 6 )
-blend_point_3/pos = Vector2( 0, -0.9 )
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Idle"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
-animation = "WindLeft"
+animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "WindDown"
+[sub_resource type="AnimationNodeBlendSpace2D" id=9]
+blend_point_0/node = SubResource( 5 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 6 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 7 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 8 )
+blend_point_3/pos = Vector2( 0, -0.9 )
 
 [sub_resource type="AnimationNodeAnimation" id=10]
-animation = "WindRight"
+animation = "WindLeft"
 
 [sub_resource type="AnimationNodeAnimation" id=11]
+animation = "WindDown"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "WindRight"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "WindUp"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=12]
-blend_point_0/node = SubResource( 8 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=14]
+blend_point_0/node = SubResource( 10 )
 blend_point_0/pos = Vector2( 1, 0 )
-blend_point_1/node = SubResource( 9 )
+blend_point_1/node = SubResource( 11 )
 blend_point_1/pos = Vector2( 0, 1.1 )
-blend_point_2/node = SubResource( 10 )
+blend_point_2/node = SubResource( 12 )
 blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 11 )
+blend_point_3/node = SubResource( 13 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
-[sub_resource type="AnimationNodeStateMachine" id=15]
-states/Idle/node = SubResource( 7 )
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/Idle/node = SubResource( 9 )
 states/Idle/position = Vector2( 512, 125 )
-states/Wind/node = SubResource( 12 )
+states/Wind/node = SubResource( 14 )
 states/Wind/position = Vector2( 740, 125 )
-transitions = [ "Idle", "Wind", SubResource( 13 ), "Wind", "Idle", SubResource( 14 ) ]
+transitions = [ "Idle", "Wind", SubResource( 15 ), "Wind", "Idle", SubResource( 16 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -198, 24.0262 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
 [node name="AnimatedGrass" type="Node2D"]
 script = ExtResource( 1 )
@@ -141,13 +141,13 @@ texture = ExtResource( 2 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 1 )
 anims/Wind = SubResource( 2 )
-anims/Wind1 = SubResource( 17 )
-anims/Wind2 = SubResource( 18 )
+anims/Wind1 = SubResource( 3 )
+anims/Wind2 = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 15 )
+tree_root = SubResource( 17 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 16 )
+parameters/playback = SubResource( 18 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Wind/blend_position = Vector2( -0.00173312, -1.07457 )
 
