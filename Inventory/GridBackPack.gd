@@ -24,7 +24,6 @@ func _ready():
 			
 			
 func insert_item(item):
-	
 	# set item_pos to the center of the top-left cell
 	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
 	
@@ -39,6 +38,7 @@ func insert_item(item):
 		return true
 	else:
 		return false
+
 
 func get_item(pos):
 	var item = get_item_under_pos(pos)

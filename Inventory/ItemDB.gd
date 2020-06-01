@@ -4,6 +4,7 @@ const ICON_PATH = "res://Inventory/assets/"
 const ICON_PATH_AMMO = "res://Inventory/assets/bullets/"
 const ICON_PATH_CLOTHING = "res://Inventory/assets/clothing/"
 const ICON_PATH_MEDICAL = "res://Inventory/assets/medical/"
+const ICON_PATH_BACKPACK = "res://Inventory/assets/backpacks/"
 
 const ITEMS = {
 	"error": {
@@ -15,7 +16,7 @@ const ITEMS = {
 const CLOTHING = {
 	"ChestRig": {
 		"asset": ICON_PATH_CLOTHING + "Rig.png",
-		"slot": "CHEST"
+		"slot": "RIG"
 	},
 }
 
@@ -23,6 +24,13 @@ const MEDICAL = {
 	"AI2": {
 		"asset": ICON_PATH_MEDICAL + "AI2.png",
 		"slot": "NONE"
+	},
+}
+
+const BACKPACK = {
+	"SSOPatrol": {
+		"asset": ICON_PATH_BACKPACK + "SSOPatrol.png",
+		"slot": "BACKPACK"
 	},
 }
 
@@ -122,7 +130,10 @@ func get_item(item_id):
 			if item_id in MEDICAL:
 				return {"value": MEDICAL[item_id], "type": "medical"}
 			else:
-				if item_id in ITEMS:
-					return {"value": ITEMS[item_id], "type": "item"}
+				if item_id in BACKPACK:
+					return {"value": BACKPACK[item_id], "type": "backpack"}
 				else:
-					return {"value": ITEMS["error"], "type": "item"}
+					if item_id in ITEMS:
+						return {"value": ITEMS[item_id], "type": "item"}
+					else:
+						return {"value": ITEMS["error"], "type": "item"}

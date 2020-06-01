@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Inventory/backpack_slot.gd" type="Script" id=1]
+
+[node name="backpack" type="Panel"]
+self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
+show_behind_parent = true
+margin_left = 8.0
+margin_top = -4.0
+margin_right = 130.0
+margin_bottom = 99.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BACKPACK" type="Panel" parent="."]
+margin_left = 22.0
+margin_top = 17.0
+margin_right = 98.0
+margin_bottom = 93.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

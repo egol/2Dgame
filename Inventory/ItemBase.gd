@@ -16,6 +16,9 @@ var ITEMTYPES = {
 	"item": {
 		"uses": 5
 	},
+	"backpack": {
+		"equipped": false
+	},
 }
 
 var data = null

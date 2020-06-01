@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://Inventory/EquipmentSlots.gd" type="Script" id=2]
-[ext_resource path="res://Inventory/assets/grid.png" type="Texture" id=3]
-[ext_resource path="res://Inventory/GridBackPack.gd" type="Script" id=4]
+[ext_resource path="res://Inventory/BackPackBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Inventory/backpack_slot.gd" type="Script" id=4]
+[ext_resource path="res://Inventory/rig.gd" type="Script" id=5]
 
 [node name="Inventory" type="Control"]
 anchor_left = 0.5
@@ -17,19 +18,19 @@ __meta__ = {
 
 [node name="InventoryBase" type="Panel" parent="."]
 margin_left = -599.0
-margin_top = -292.0
+margin_top = -322.0
 margin_right = 605.0
-margin_bottom = 291.0
+margin_bottom = 261.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="EquipmentSlots" type="Panel" parent="."]
 self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
-margin_left = -578.0
-margin_top = -267.0
-margin_right = -193.0
-margin_bottom = 247.0
+margin_left = -577.0
+margin_top = -288.0
+margin_right = -192.0
+margin_bottom = 226.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -72,218 +73,120 @@ __meta__ = {
 }
 
 [node name="MAIN_HAND" type="Panel" parent="EquipmentSlots"]
-margin_left = 8.0
-margin_top = 128.0
-margin_right = 83.0
-margin_bottom = 292.0
+margin_left = 9.0
+margin_top = 43.0
+margin_right = 84.0
+margin_bottom = 207.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MAIN_HAND2" type="Panel" parent="EquipmentSlots"]
-margin_left = 227.0
-margin_top = 128.0
-margin_right = 371.0
-margin_bottom = 196.0
+margin_left = 230.0
+margin_top = 379.0
+margin_right = 374.0
+margin_bottom = 447.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MAIN_HAND4" type="Panel" parent="EquipmentSlots"]
 margin_left = 228.0
-margin_top = 329.0
+margin_top = 297.0
 margin_right = 299.0
-margin_bottom = 400.0
+margin_bottom = 368.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MAIN_HAND5" type="Panel" parent="EquipmentSlots"]
 margin_left = 227.0
-margin_top = 248.0
+margin_top = 214.0
 margin_right = 298.0
-margin_bottom = 319.0
+margin_bottom = 285.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GridBackPack" parent="." instance=ExtResource( 3 )]
+margin_left = 331.0
+margin_top = -285.0
+margin_right = 591.0
+margin_bottom = 199.0
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-margin_left = -172.0
-margin_top = -266.0
-margin_right = 329.0
-margin_bottom = 234.0
-rect_clip_content = false
+margin_left = -180.0
+margin_top = -287.0
+margin_right = 321.0
+margin_bottom = 213.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_bottom = 4000.0
-custom_constants/separation = 400
+margin_bottom = 600.0
+mouse_filter = 2
+custom_constants/separation = 300
 
 [node name="Control11" type="Control" parent="ScrollContainer/VBoxContainer"]
+mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control11"]
-self_modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
-margin_left = 9.0
-margin_top = 6.0
-margin_right = 99.0
-margin_bottom = 96.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="GridBackPack" type="TextureRect" parent="ScrollContainer/VBoxContainer/Control11"]
-self_modulate = Color( 0.300781, 0.274933, 0.274933, 1 )
-margin_left = 8.0
-margin_top = 104.0
-margin_right = 308.0
-margin_bottom = 404.0
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 2
+[node name="backpack" type="Panel" parent="ScrollContainer/VBoxContainer/Control11"]
+self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
+show_behind_parent = true
+margin_left = 13.0
+margin_top = 1.0
+margin_right = 135.0
+margin_bottom = 104.0
+mouse_filter = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 400.0
-margin_bottom = 400.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
+[node name="BACKPACK" type="Panel" parent="ScrollContainer/VBoxContainer/Control11/backpack"]
+margin_left = 19.0
+margin_top = 17.0
+margin_right = 95.0
+margin_bottom = 93.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control2" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 800.0
-margin_bottom = 800.0
+[node name="Control12" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 300.0
+margin_bottom = 300.0
+mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control2"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
+[node name="rig" type="Panel" parent="ScrollContainer/VBoxContainer/Control12"]
+self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
+show_behind_parent = true
+margin_left = 13.0
+margin_top = -26.0
+margin_right = 135.0
+margin_bottom = 77.0
+mouse_filter = 1
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control3" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 1200.0
-margin_bottom = 1200.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control3"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
+[node name="RIG" type="Panel" parent="ScrollContainer/VBoxContainer/Control12/rig"]
+margin_left = 19.0
+margin_top = 17.0
+margin_right = 95.0
+margin_bottom = 93.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Control4" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 1600.0
-margin_bottom = 1600.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control4"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control5" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 2000.0
-margin_bottom = 2000.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control5"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control6" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 2400.0
-margin_bottom = 2400.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control6"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control7" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 2800.0
-margin_bottom = 2800.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control7"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control8" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 3200.0
-margin_bottom = 3200.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control8"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control9" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 3600.0
-margin_bottom = 3600.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control9"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control10" type="Control" parent="ScrollContainer/VBoxContainer"]
-margin_top = 4000.0
-margin_bottom = 4000.0
-
-[node name="Panel" type="Panel" parent="ScrollContainer/VBoxContainer/Control10"]
-self_modulate = Color( 0.776471, 0, 0, 1 )
-margin_left = 58.0
-margin_top = 13.0
-margin_right = 98.0
-margin_bottom = 53.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="gui_input" from="ScrollContainer/VBoxContainer/Control11/GridBackPack" to="." method="_on_GridBackPack_gui_input"]
+[node name="Control13" type="Control" parent="ScrollContainer/VBoxContainer"]
+margin_top = 600.0
+margin_bottom = 600.0
+mouse_filter = 2
+[connection signal="gui_input" from="." to="." method="_on_Inventory_gui_input"]
+[connection signal="changed_backpack" from="ScrollContainer/VBoxContainer/Control11/backpack" to="." method="_on_backpack_changed_backpack"]
+[connection signal="changed_backpack" from="ScrollContainer/VBoxContainer/Control12/rig" to="." method="_on_backpack_changed_backpack"]
