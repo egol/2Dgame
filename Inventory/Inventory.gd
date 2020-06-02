@@ -66,6 +66,16 @@ func _on_Inventory_gui_input(event):
 func _process(delta):
 	var cursor_pos = get_global_mouse_position()
 	if !dbl_clk:
+#		if Input.is_action_just_pressed("inv_grab") and Input.is_action_pressed("split_stack"):
+#			var item = grab(cursor_pos)
+#			var prev_pos = item_held.rect_global_position
+#			if !grid_bkpk.insert_item_at_first_available_spot(item):
+#				release(cursor_pos)
+#			else:
+#				change_parent(grid_bkpk, item_held)
+#				item_held.rect_global_position = prev_pos
+#				item_held = null
+#			release(cursor_pos)
 		if Input.is_action_just_pressed("inv_grab"):
 			grab(cursor_pos)
 		elif Input.is_action_just_released("inv_grab"):
@@ -148,6 +158,9 @@ func grab(cursor_pos):
 			
 			if item_held.inv.size() > 0:
 				for i in range(item_held.inv.size()):
+					if item_held.inv[i].get_child_count() > 1:
+						pass
+					
 					item_held.remove_child(item_held.inv[i])
 			
 			if c.has_method("get_item_under_pos"):
