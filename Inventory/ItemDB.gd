@@ -3,6 +3,7 @@ extends Node2D
 const ICON_PATH = "res://Inventory/assets/"
 const ICON_PATH_AMMO = "res://Inventory/assets/bullets/"
 const ICON_PATH_CLOTHING = "res://Inventory/assets/clothing/"
+const ICON_PATH_RIG = "res://Inventory/assets/rig/"
 const ICON_PATH_MEDICAL = "res://Inventory/assets/medical/"
 const ICON_PATH_BACKPACK = "res://Inventory/assets/backpacks/"
 
@@ -14,9 +15,18 @@ const ITEMS = {
 }
 
 const CLOTHING = {
-	"ChestRig": {
+	"shirt": {
 		"asset": ICON_PATH_CLOTHING + "Rig.png",
-		"slot": "RIG"
+		"slot": "CHEST"
+	},
+}
+
+const RIG = {
+	"ChestRig": {
+		"asset": ICON_PATH_RIG + "Rig.png",
+		"slot": "RIG",
+		"inv": [[[1,2], [1,2], [1,2]],
+				[[1,2], [2,2], [1,2]]]
 	},
 }
 
@@ -30,7 +40,9 @@ const MEDICAL = {
 const BACKPACK = {
 	"SSOPatrol": {
 		"asset": ICON_PATH_BACKPACK + "SSOPatrol.png",
-		"slot": "BACKPACK"
+		"slot": "BACKPACK",
+		"inv": [[[5,6]],
+				[[1,1], [1,1], [1,1], [1,1], [1,1]]]
 	},
 }
 
@@ -121,19 +133,31 @@ const AMMO = {
 
 
 func get_item(item_id):
-	if item_id in AMMO:
-		return {"value": AMMO[item_id], "type": "bullets"}
-	else:
-		if item_id in CLOTHING:
-			return {"value": CLOTHING[item_id], "type": "clothing"}
-		else:
-			if item_id in MEDICAL:
-				return {"value": MEDICAL[item_id], "type": "medical"}
-			else:
-				if item_id in BACKPACK:
-					return {"value": BACKPACK[item_id], "type": "backpack"}
-				else:
-					if item_id in ITEMS:
-						return {"value": ITEMS[item_id], "type": "item"}
-					else:
-						return {"value": ITEMS["error"], "type": "item"}
+	
+	var list = [AMMO, CLOTHING, MEDICAL, BACKPACK, ITEMS, RIG]
+	var list_type = ["bullets", "clothing", "medical", "backpack", "item", "rig"]
+	
+	for i in range(list.size()):
+		if item_id in list[i]:
+#			print({"value": list[i][item_id], "type": list_type[i]})
+			return {"value": list[i][item_id], "type": list_type[i]}
+			
+	return {"value": ITEMS["error"], "type": "item"}
+	
+	
+#	if item_id in AMMO:
+#		return {"value": AMMO[item_id], "type": "bullets"}
+#	else:
+#		if item_id in CLOTHING:
+#			return {"value": CLOTHING[item_id], "type": "clothing"}
+#		else:
+#			if item_id in MEDICAL:
+#				return {"value": MEDICAL[item_id], "type": "medical"}
+#			else:
+#				if item_id in BACKPACK:
+#					return {"value": BACKPACK[item_id], "type": "backpack"}
+#				else:
+#					if item_id in ITEMS:
+#						return {"value": ITEMS[item_id], "type": "item"}
+#					else:
+#						return {"value": ITEMS["error"], "type": "item"}

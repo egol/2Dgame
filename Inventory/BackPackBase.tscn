@@ -5,10 +5,8 @@
 
 [node name="GridBackPack" type="TextureRect"]
 self_modulate = Color( 0.300781, 0.274933, 0.274933, 1 )
-margin_left = 8.0
-margin_top = 104.0
-margin_right = 308.0
-margin_bottom = 404.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 2

@@ -4,7 +4,6 @@ onready var slots = get_children()
 var grid = preload("res://Inventory/BackPackBase.tscn")
 var items = {}
 signal changed_backpack(item)
-var last_item = null
 
 func _ready():
 	for slot in slots:
@@ -17,8 +16,10 @@ func insert_item(item):
 	
 	if slot == null:
 		return false
-	print("slot name:" + slot.name)
-	var item_slot = ItemDB.get_item(item.get_meta("id"))["value"]["slot"]
+	
+	var item_data = ItemDB.get_item(item.get_meta("id"))["value"]
+	
+	var item_slot = item_data["slot"]
 	if item_slot != slot.name:
 		return false
 	if items[item_slot] != null:
@@ -27,14 +28,10 @@ func insert_item(item):
 	# place the item into the equipment slot
 	items[item_slot] = item
 	item.rect_global_position = slot.rect_global_position + slot.rect_size/2 - item.rect_size/2
-	if last_item != null:
-		item.add_child(last_item)
-	else:
-		var new_grid = grid.instance()
-		item.add_child(new_grid)
-		emit_signal("changed_backpack", new_grid)
-		new_grid.rect_global_position = item.rect_global_position - Vector2(-100, 0)
-		new_grid.rect_size = Vector2(6, 7)*Vector2(new_grid.cell_size, new_grid.cell_size)
+	
+	if item.inv.size() > 0:
+		for i in range(item.inv.size()):
+			item.add_child(item.inv[i])
 	
 	return true
 	
@@ -48,8 +45,9 @@ func grab_item(pos):
 	var item_slot = ItemDB.get_item(item.get_meta("id"))["value"]["slot"]
 	items[item_slot] = null
 	
-	last_item = item.get_child(1)
-	item.remove_child(item.get_child(1))
+#	if item.inv.size() > 0:
+#		for i in range(item.inv.size()):
+#			item.remove_child(item.inv[i])
 	
 	return item
 	

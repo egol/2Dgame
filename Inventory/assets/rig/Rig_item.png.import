@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rig.png-ea9355756d2dc7c419838a810b4b8c1e.stex"
+path="res://.import/Rig_item.png-0ddbd347d0dcdabc55b0aadbd4dda24a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Inventory/assets/clothing/Rig.png"
-dest_files=[ "res://.import/Rig.png-ea9355756d2dc7c419838a810b4b8c1e.stex" ]
+source_file="res://Inventory/assets/rig/Rig_item.png"
+dest_files=[ "res://.import/Rig_item.png-0ddbd347d0dcdabc55b0aadbd4dda24a.stex" ]
 
 [params]
 

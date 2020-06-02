@@ -108,7 +108,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridBackPack" parent="." instance=ExtResource( 3 )]
+[node name="Stash" parent="." instance=ExtResource( 3 )]
 margin_left = 331.0
 margin_top = -285.0
 margin_right = 591.0

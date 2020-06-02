@@ -19,9 +19,13 @@ var ITEMTYPES = {
 	"backpack": {
 		"equipped": false
 	},
+	"rig": {
+		"equipped": false
+	},
 }
 
 var data = null
+var inv = []
 
 func update_display():
 	if "amount" in data:

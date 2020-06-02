@@ -59,30 +59,34 @@ func grab_item(pos):
 	
 	set_grid_space(g_pos, item_size_in_cells, false)
 	
+#	if item.inv.size() > 0:
+#		for i in range(item.inv.size()):
+#			item.remove_child(item.inv[i])
+	
 	items.remove(items.find(item))
 	
 	return item
-	
-	
-func update_item(item):
-		
-#	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
-#	var g_pos = pos_to_grid_coord(item_pos, item)
-#	var item_size_in_cells = get_grid_size(item)
-#	set_grid_space(g_pos, item_size_in_cells, false)
-#
-#	items.remove(items.find(item))
-#	return item
-	pass
-	
 	
 	
 func get_item_under_pos(pos):
 	#checked
 	for item in items:
 		if is_instance_valid(item) and item.has_method("update_display"):
-			if item.get_global_rect().has_point(pos):
+			
+			var size = item.rect_size
+			var rect = null
+			if item.rect_rotation == 90:
+				rect = Rect2(item.rect_global_position, Vector2(size.y, size.x))
+			else:
+				rect = item.get_global_rect()
+
+			if rect.has_point(pos):
 				return item
+				
+			
+#			if item.get_global_rect().has_point(pos):
+#				print(item.rect_rotation)
+#				return item
 	return null
 	
 	
@@ -97,7 +101,6 @@ func is_grid_space_available(pos, item_size_in_cells):
 		return false
 	if pos.x + item_size_in_cells.width > grid_width or pos.y + item_size_in_cells.height > grid_height:
 		return false
-		
 	# check every cell in the grid if it's occupied	
 	for i in range(pos.x, pos.x + item_size_in_cells.width):
 		for j in range(pos.y, pos.y + item_size_in_cells.height):
@@ -129,22 +132,14 @@ func get_grid_size(item):
 # return the item's size in units of cell_size
 	var results = {}
 	
-	if item.get_child(0) != null:
-		var s = item.rect_size
-		var r = item.rect_rotation
-		if r == 90:
-			s.x = item.rect_size.y
-			s.y = item.rect_size.x
-		results.width = clamp(int(s.x / cell_size), 1, 500)
-		results.height = clamp(int(s.y / cell_size), 1, 500)
-	else:
-		var s = item.rect_size
-		var r = item.rect_rotation
-		if r == 90:
-			s.x = item.rect_size.y
-			s.y = item.rect_size.x
-		results.width = clamp(int(s.x / cell_size), 1, 500)
-		results.height = clamp(int(s.y / cell_size), 1, 500)
+	var s = item.rect_size
+	var r = item.rect_rotation
+	if r == 90:
+		s.x = item.rect_size.y
+		s.y = item.rect_size.x
+	results.width = clamp(int(s.x / cell_size), 1, 500)
+	results.height = clamp(int(s.y / cell_size), 1, 500)
+	
 	return results
 	
 	
