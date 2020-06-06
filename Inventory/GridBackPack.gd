@@ -28,8 +28,6 @@ func insert_item(item):
 	var item_pos = item.rect_position + Vector2(cell_size/2, cell_size/2)
 	
 	if item.get_parent().name == "Inventory":
-		print("global item pos, ", item.rect_global_position)
-		print("global pos, ", self.get_global_position())
 		item_pos = item.rect_global_position - self.get_global_position() + Vector2(cell_size/2, cell_size/2)
 	
 	var g_pos = pos_to_grid_coord(item_pos)
@@ -144,8 +142,10 @@ func insert_item_at_first_available_spot(item):
 	for y in range(grid_height):
 		for x in range(grid_width):
 			if !grid[x][y]:
-				print(Vector2(x, y))
-				item.rect_position = Vector2(x, y) * cell_size
+				if item.get_parent().name == "Inventory":
+					item.rect_global_position = self.get_global_position() + (Vector2(x, y) * cell_size)
+				else:
+					item.rect_position = Vector2(x, y) * cell_size
 				if insert_item(item):
 					return true
 	return false

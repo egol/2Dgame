@@ -29,6 +29,7 @@ var talking = false
 
 var can_fire = true
 var once = false
+var init = true
 
 onready var animationPlayer = $Gun/gunanimation
 onready var animationTree = $AnimationTree
@@ -44,6 +45,13 @@ onready var canvas = get_tree().get_root().find_node("CanvasLayer", true, false)
 func _ready():
 	var Inventory = preload("res://Inventory/Inventory.tscn")
 	inventory = Inventory.instance()
+	
+#	canvas.add_child(inventory, true)
+#	canvas.remove_child(inventory)
+	
+	in_inventory = true
+	once = true
+	state = INVENTORY
 	
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
@@ -76,7 +84,6 @@ func _process(delta):
 		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(gun.rotation))
 		bulletHitbox.knockback_vector = roll_vector
 		
-		
 		get_tree().get_root().add_child(bullet_instance)
 		
 		var temp = shoot_effect.instance()
@@ -98,6 +105,11 @@ func inventory_state(delta):
 		canvas.add_child(inventory, true)
 		once = false
 	if !in_inventory:
+		canvas.remove_child(inventory)
+		state = MOVE
+	if init:
+		init = false
+		in_inventory = !in_inventory
 		canvas.remove_child(inventory)
 		state = MOVE
 		

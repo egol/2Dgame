@@ -67,17 +67,29 @@ func _on_Inventory_gui_input(event):
 func _process(delta):
 	var cursor_pos = get_global_mouse_position()
 	if !dbl_clk:
-#		if Input.is_action_just_pressed("inv_grab") and Input.is_action_pressed("split_stack"):
-#			var item = grab(cursor_pos)
-#			var prev_pos = item_held.rect_global_position
-#			if !grid_bkpk.insert_item_at_first_available_spot(item):
-#				release(cursor_pos)
-#			else:
-#				change_parent(grid_bkpk, item_held)
-#				item_held.rect_global_position = prev_pos
-#				item_held = null
-#			release(cursor_pos)
-		if Input.is_action_just_pressed("inv_grab"):
+		if Input.is_action_just_pressed("inv_grab") and Input.is_action_pressed("quick_equip"):
+			grab(cursor_pos)
+			if item_held != null:
+				if !last_container.name == "Stash":
+					if grid_bkpk.insert_item_at_first_available_spot(item_held):
+						var prev_pos = item_held.rect_global_position
+						change_parent(grid_bkpk, item_held)
+						item_held.rect_global_position = prev_pos
+						item_held = null
+					else:
+						return_item_to_last_slot(last_inventory)
+				else:
+					if backpack_slot.get_child_count() > 1:
+						var backpack = backpack_slot.get_child(1).get_child(2).get_child(0).get_child(0)
+						if backpack.insert_item_at_first_available_spot(item_held):
+							var prev_pos = item_held.rect_global_position
+							change_parent(backpack, item_held)
+							item_held.rect_global_position = prev_pos
+							item_held = null
+						else:
+							return_item_to_last_slot(last_inventory)
+				
+		elif Input.is_action_just_pressed("inv_grab"):
 			grab(cursor_pos)
 		elif Input.is_action_just_released("inv_grab"):
 			release(cursor_pos)
@@ -115,21 +127,43 @@ func stack_similair(c):
 #		counter += 1
 #		if a.get_global_rect().has_point(get_global_mouse_position()):
 #			item_held = a
-	for i in range(len(c.items)-1, 0, -1):
-		var a = c.items[i]
-		if is_instance_valid(a):
-			if "amount" in a.data:
-				if item_held.get_meta("id") == a.get_meta("id"):
-					if item_held.data["amount"] + a.data["amount"] <= item_held.data["max_stack"]:
-						item_held.data["amount"] += a.data["amount"]
-						item_held.update_display()
-#							if !a.is_queued_for_deletion():
-						c.items.remove(i)
-						
-						set_grid(a, false, c)
-						
-						a.queue_free()
-						a = null
+	var vBox = c.get_parent().get_parent()
+	
+	if vBox.name == "VBox":
+		for h in range(vBox.get_child_count()):
+			for b in range(vBox.get_child(h).get_child_count()):
+				var grid = vBox.get_child(h).get_child(b)
+				for i in range(len(grid.items)-1, -1, -1):
+					var a = grid.items[i]
+					if is_instance_valid(a):
+						if "amount" in a.data:
+							if item_held.get_meta("id") == a.get_meta("id"):
+								if item_held.data["amount"] + a.data["amount"] <= item_held.data["max_stack"]:
+									item_held.data["amount"] += a.data["amount"]
+									item_held.update_display()
+									
+									grid.items.remove(i)
+									
+									set_grid(a, false, grid)
+									
+									a.queue_free()
+									a = null
+	else:
+		for i in range(len(c.items)-1, -1, -1):
+			var a = c.items[i]
+			if is_instance_valid(a):
+				if "amount" in a.data:
+					if item_held.get_meta("id") == a.get_meta("id"):
+						if item_held.data["amount"] + a.data["amount"] <= item_held.data["max_stack"]:
+							item_held.data["amount"] += a.data["amount"]
+							item_held.update_display()
+							
+							c.items.remove(i)
+							
+							set_grid(a, false, c)
+							
+							a.queue_free()
+							a = null
 							
 func set_grid(item, type, c):
 	var item_pos = item.rect_position + Vector2(c.cell_size/2, c.cell_size/2)
