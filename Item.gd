@@ -7,7 +7,7 @@ export var item_name = "error"
 export var size = 1
 
 
-onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
+onready var player = get_tree().get_root().find_node("Player", true, false)
 
 func _ready():
 	var s = ItemDB.get_item(item_name)["value"]["asset"]
@@ -31,7 +31,7 @@ func _process(delta):
 		shadow.use_parent_material = true
 		
 		if Input.is_action_just_pressed("shoot"):
-			inventory.pickup_item(item_name)
+			player.inventory.pickup_item(item_name)
 			queue_free()
 		
 	else:

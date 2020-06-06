@@ -28,6 +28,7 @@ var in_inventory = false
 var talking = false
 
 var can_fire = true
+var once = false
 
 onready var animationPlayer = $Gun/gunanimation
 onready var animationTree = $AnimationTree
@@ -37,9 +38,13 @@ onready var gun = $Gun
 onready var gunbarrel = $Gun/gunbarrel
 onready var gunsprite = $Gun/sprite
 onready var hurtbox = $Hurtbox
-onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
+var inventory = null
+onready var canvas = get_tree().get_root().find_node("CanvasLayer", true, false)
 
 func _ready():
+	var Inventory = preload("res://Inventory/Inventory.tscn")
+	inventory = Inventory.instance()
+	
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 	
@@ -88,12 +93,12 @@ func _process(delta):
 		can_fire = true
 		
 func inventory_state(delta):
-	var inv = get_tree().get_root().find_node("Inventory", true, false)
-	
-	if in_inventory:
-		inv.visible = true
-	else:
-		inv.visible = false
+#	var inv = get_tree().get_root().find_node("Inventory", true, false)
+	if in_inventory and once:
+		canvas.add_child(inventory, true)
+		once = false
+	if !in_inventory:
+		canvas.remove_child(inventory)
 		state = MOVE
 		
 	if Input.is_action_just_pressed("open_inv"):
@@ -144,6 +149,7 @@ func move_state(delta):
 		state = ROLL
 	if Input.is_action_just_pressed("open_inv"):
 		in_inventory = !in_inventory
+		once = true
 		state = INVENTORY
 	if Input.is_action_just_pressed("talk"):
 		talking = !talking

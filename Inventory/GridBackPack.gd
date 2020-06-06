@@ -147,7 +147,8 @@ func insert_item_at_first_available_spot(item):
 	for y in range(grid_height):
 		for x in range(grid_width):
 			if !grid[x][y]:
-				item.rect_global_position = rect_global_position + Vector2(x, y) * cell_size
+				print(Vector2(x, y))
+				item.rect_position = Vector2(x, y) * cell_size
 				if insert_item(item):
 					return true
 	return false

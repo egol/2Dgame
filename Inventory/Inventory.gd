@@ -16,6 +16,7 @@ var last_container = null
 var last_pos = Vector2()
 var last_item = null
 var last_inventory = null
+var last_rot = 0
 
 var dbl_clk = false
 
@@ -155,11 +156,19 @@ func grab(cursor_pos):
 		item_held = c.grab_item(cursor_pos) 
 		if item_held:
 			last_container = c
+			last_rot = item_held.rect_rotation
 			
+			#A monstrosity im too lazy to replace
 			if item_held.inv.size() > 0:
 				for i in range(item_held.inv.size()):
 					if item_held.inv[i].get_child_count() > 1:
-						pass
+						for b in range(item_held.inv[i].get_child_count()):
+							for c in range(item_held.inv[i].get_child(b).get_child_count()):
+								if item_held.inv[i].get_child(b).get_child(c).get_child_count() > 0:
+									for d in range(item_held.inv[i].get_child(b).get_child(c).get_child_count()):
+										if item_held.inv[i].get_child(b).get_child(c).get_child(d).get_child_count() > 1:
+											for e in range(item_held.inv[i].get_child(b).get_child(c).get_child(d).inv.size()):
+												item_held.inv[i].get_child(b).get_child(c).get_child(d).remove_child(item_held.inv[i].get_child(b).get_child(c).get_child(d).inv[e])
 					
 					item_held.remove_child(item_held.inv[i])
 			
@@ -302,8 +311,11 @@ func return_item_to_last_slot(c):
 		if item_held.get_parent() != c:
 			change_parent(c, item_held)
 		
-		if item_held.rect_rotation == 90:
-			last_item.rect_rotation = 0
+		last_item.rect_rotation = last_rot
+		
+		if last_rot == 90:
+			last_item.rect_scale.y = -1
+		else:
 			last_item.rect_scale.y = 1
 		
 		item_held.rect_global_position = last_pos
@@ -318,6 +330,7 @@ func pickup_item(item_id):
 	var item_dat = ItemDB.get_item(item_id)
 	
 	item.texture = load(item_dat["value"]["asset"])
+	item.rect_size = item.texture.get_size()
 	
 #	grid_bkpk.get_parent().add_child(item)
 	grid_bkpk.add_child(item)
@@ -381,7 +394,6 @@ func pickup_item(item_id):
 #		item.get_child(0).visible = true
 #		item.get_child(0).rect_position = item.rect_size
 #		item.get_child(0).text = item.data["amount"]
-		
 	if !grid_bkpk.insert_item_at_first_available_spot(item):
 		item.queue_free()
 		return false
