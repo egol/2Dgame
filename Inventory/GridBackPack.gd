@@ -25,14 +25,22 @@ func _ready():
 			
 func insert_item(item):
 	# set item_pos to the center of the top-left cell
-	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
+	var item_pos = item.rect_position + Vector2(cell_size/2, cell_size/2)
 	
-	var g_pos = pos_to_grid_coord(item_pos, item)
+	if item.get_parent().name == "Inventory":
+		print("global item pos, ", item.rect_global_position)
+		print("global pos, ", self.get_global_position())
+		item_pos = item.rect_global_position - self.get_global_position() + Vector2(cell_size/2, cell_size/2)
+	
+	var g_pos = pos_to_grid_coord(item_pos)
 	var item_size_in_cells = get_grid_size(item)
 	
 	if is_grid_space_available(g_pos, item_size_in_cells):
 		set_grid_space(g_pos, item_size_in_cells, true)
-		item.rect_global_position = rect_global_position + Vector2(g_pos.x, g_pos.y) * cell_size
+		if item.get_parent().name == "Inventory":
+			item.rect_global_position = Vector2(g_pos.x, g_pos.y) * cell_size + self.get_global_position()
+		else:
+			item.rect_position = Vector2(g_pos.x, g_pos.y) * cell_size
 		#checked
 		items.append(item)
 		return true
@@ -52,9 +60,9 @@ func grab_item(pos):
 	if item == null and !is_instance_valid(item):
 		return null
 		
-	var item_pos = item.rect_global_position + Vector2(cell_size/2, cell_size/2)
+	var item_pos = item.rect_position + Vector2(cell_size/2, cell_size/2)
 	
-	var g_pos = pos_to_grid_coord(item_pos, item)
+	var g_pos = pos_to_grid_coord(item_pos)
 	var item_size_in_cells = get_grid_size(item)
 	
 	set_grid_space(g_pos, item_size_in_cells, false)
@@ -108,23 +116,12 @@ func is_grid_space_available(pos, item_size_in_cells):
 				return false
 	return true
 
+func pos_to_grid_coord(pos):
+	var local_pos = pos
 	
-func pos_to_grid_coord(pos, item):
-	var local_pos = pos - rect_global_position
-#	print(local_pos)
-	var local_pivot = item.rect_pivot_offset + local_pos
 	var results = {}
 	results.x = int(local_pos.x / cell_size)
 	results.y = int(local_pos.y / cell_size)
-	
-
-#	if item.rect_rotation == 90:
-#		item.rect_global_position.x += item.rect_scale.y
-#		pass
-#		var temp = rotate_point(local_pivot, -90, local_pos)
-#		results.x = int(temp.x / cell_size)-1
-#		results.y = int(temp.y / cell_size)-1
-		#print(results)
 		
 	return results
 

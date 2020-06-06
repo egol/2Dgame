@@ -132,9 +132,9 @@ func stack_similair(c):
 						a = null
 							
 func set_grid(item, type, c):
-	var item_pos = item.rect_global_position + Vector2(c.cell_size/2, c.cell_size/2)
+	var item_pos = item.rect_position + Vector2(c.cell_size/2, c.cell_size/2)
 	
-	var g_pos = c.pos_to_grid_coord(item_pos, item)
+	var g_pos = c.pos_to_grid_coord(item_pos)
 	var item_size_in_cells = c.get_grid_size(item)
 	
 	c.set_grid_space(g_pos, item_size_in_cells, type)
@@ -220,7 +220,6 @@ func release(cursor_pos):
 						
 		elif c.insert_item(item_held):
 			var prev_pos = item_held.rect_global_position
-#			change_parent(c.get_parent(), item_held)
 			change_parent(c, item_held)
 			item_held.rect_global_position = prev_pos
 			item_held = null
