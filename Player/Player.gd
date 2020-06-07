@@ -32,7 +32,7 @@ var once = false
 var init = true
 
 onready var animationPlayer = $Gun/gunanimation
-onready var animationTree = $AnimationTree
+onready var animationTree = $CharacterRig/AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 
 onready var gun = $Gun
