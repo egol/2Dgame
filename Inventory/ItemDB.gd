@@ -6,6 +6,7 @@ const ICON_PATH_CLOTHING = "res://Inventory/assets/clothing/"
 const ICON_PATH_RIG = "res://Inventory/assets/rig/"
 const ICON_PATH_MEDICAL = "res://Inventory/assets/medical/"
 const ICON_PATH_BACKPACK = "res://Inventory/assets/backpacks/"
+const ICON_PATH_GUNS = "res://Inventory/assets/guns/"
 
 const ITEMS = {
 	"error": {
@@ -43,6 +44,23 @@ const BACKPACK = {
 		"slot": "BACKPACK",
 		"inv": [[[5,6]],
 				[[1,1], [1,1], [1,1], [1,1], [1,1]]]
+	},
+}
+
+const GUNS = {
+	"AK47": {
+		"asset": ICON_PATH_GUNS + "ak47.png",
+		"slot": "MAIN_HAND",
+	},
+}
+
+const ATTACHMENTS = {
+	"AK47": {
+		"asset": ICON_PATH_GUNS + "ak47.png",
+		"slot": "NONE",
+		"accuracy": 50,
+		"recoil": 20,
+		"ergonomics": 10,
 	},
 }
 

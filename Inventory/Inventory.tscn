@@ -45,7 +45,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HEAD2" type="Panel" parent="EquipmentSlots"]
+[node name="MASK" type="Panel" parent="EquipmentSlots"]
 margin_left = 209.0
 margin_top = 42.0
 margin_right = 285.0
@@ -72,16 +72,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MAIN_HAND" type="Panel" parent="EquipmentSlots"]
+[node name="MAIN_HAND2" type="Panel" parent="EquipmentSlots"]
 margin_left = 9.0
-margin_top = 43.0
+margin_top = 104.0
 margin_right = 84.0
-margin_bottom = 207.0
+margin_bottom = 268.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MAIN_HAND2" type="Panel" parent="EquipmentSlots"]
+[node name="MAIN_HAND" type="Panel" parent="EquipmentSlots"]
 margin_left = 230.0
 margin_top = 379.0
 margin_right = 374.0
@@ -90,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MAIN_HAND4" type="Panel" parent="EquipmentSlots"]
+[node name="MEELE" type="Panel" parent="EquipmentSlots"]
 margin_left = 228.0
 margin_top = 297.0
 margin_right = 299.0
@@ -99,7 +99,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MAIN_HAND5" type="Panel" parent="EquipmentSlots"]
+[node name="PISTOL" type="Panel" parent="EquipmentSlots"]
 margin_left = 227.0
 margin_top = 214.0
 margin_right = 298.0

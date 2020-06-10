@@ -29,8 +29,8 @@ func _ready():
 	for a in range(10):
 		pickup_item("7.62x39mm")
 		
-func _on_backpack_changed_backpack(item):
-	player_inv_list.append(item)
+#func _on_backpack_changed_backpack(item):
+#	player_inv_list.append(item)
 		
 func _on_Inventory_gui_input(event):
 #	print(event)

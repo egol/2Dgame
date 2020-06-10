@@ -1,7 +1,6 @@
 extends Panel
 
 onready var slots = get_children()
-var grid = preload("res://Inventory/BackPackBase.tscn")
 var items = {}
 signal changed_backpack(item)
 
@@ -44,10 +43,6 @@ func grab_item(pos):
 		
 	var item_slot = ItemDB.get_item(item.get_meta("id"))["value"]["slot"]
 	items[item_slot] = null
-	
-#	if item.inv.size() > 0:
-#		for i in range(item.inv.size()):
-#			item.remove_child(item.inv[i])
 	
 	return item
 	

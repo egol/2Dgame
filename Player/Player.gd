@@ -19,6 +19,8 @@ var bullet = preload("res://Player/Bullet.tscn")
 var roll_vector = Vector2.DOWN
 var stats = PlayerStats
 
+var equippedItem = null
+
 #signal fired_shot
 
 export var shoot_effect: PackedScene
@@ -37,7 +39,7 @@ onready var animationState = animationTree.get("parameters/playback")
 
 onready var gun = $Gun
 onready var gunbarrel = $Gun/gunbarrel
-onready var gunsprite = $Gun/sprite
+onready var gunsprite = $CharacterRig/Torso/AssaultRifle
 onready var hurtbox = $Hurtbox
 var inventory = null
 onready var canvas = get_tree().get_root().find_node("CanvasLayer", true, false)
@@ -152,10 +154,10 @@ func move_state(delta):
 	
 	move()
 	
-	if gun.global_rotation_degrees > 90 or gun.global_rotation_degrees < -90:
-		gunsprite.scale.y = -1
-	else:
-		gunsprite.scale.y = 1
+#	if gun.global_rotation_degrees > 90 or gun.global_rotation_degrees < -90:
+#		gunsprite.scale.y = -1
+#	else:
+#		gunsprite.scale.y = 1
 		
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
@@ -183,6 +185,7 @@ func roll_animation_finished():
 func rotate_pointer(point_direction: Vector2) -> void:
 	var temp = rad2deg(atan2(point_direction.y, point_direction.x))
 	gun.rotation_degrees = temp
+	gunsprite.rotation_degrees = temp
 			
 func kill():
 	get_tree().reload_current_scene()
