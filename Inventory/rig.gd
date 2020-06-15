@@ -2,7 +2,6 @@ extends Panel
 
 onready var slots = get_children()
 var items = {}
-signal changed_backpack(item)
 
 func _ready():
 	for slot in slots:
@@ -17,11 +16,12 @@ func insert_item(item):
 		return false
 	
 	var item_data = ItemDB.get_item(item.get_meta("id"))["value"]
-	
 	var item_slot = item_data["slot"]
-	if item_slot != slot.name:
+	
+	if !("hotbar" in item_data):
 		return false
-	if items[item_slot] != null:
+	
+	if items[slot.name] != null:
 		return false
 		
 	# place the item into the equipment slot

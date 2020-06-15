@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://Inventory/EquipmentSlots.gd" type="Script" id=2]
 [ext_resource path="res://Inventory/BackPackBase.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Inventory/backpack_slot.gd" type="Script" id=4]
-[ext_resource path="res://Inventory/rig.gd" type="Script" id=5]
+[ext_resource path="res://Inventory/invSlot.tscn" type="PackedScene" id=6]
 
 [node name="Inventory" type="Control"]
 anchor_left = 0.5
@@ -132,24 +131,17 @@ custom_constants/separation = 300
 [node name="Control11" type="Control" parent="ScrollContainer/VBoxContainer"]
 mouse_filter = 2
 
-[node name="backpack" type="Panel" parent="ScrollContainer/VBoxContainer/Control11"]
-self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
-show_behind_parent = true
-margin_left = 13.0
-margin_top = 1.0
-margin_right = 135.0
-margin_bottom = 104.0
-mouse_filter = 1
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="backpack" parent="ScrollContainer/VBoxContainer/Control11" instance=ExtResource( 6 )]
+margin_left = 8.0
+margin_top = -1.0
+margin_right = 104.0
+margin_bottom = 95.0
 
 [node name="BACKPACK" type="Panel" parent="ScrollContainer/VBoxContainer/Control11/backpack"]
-margin_left = 19.0
-margin_top = 17.0
-margin_right = 95.0
-margin_bottom = 93.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 84.0
+margin_bottom = 84.0
 mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -160,24 +152,17 @@ margin_top = 300.0
 margin_bottom = 300.0
 mouse_filter = 2
 
-[node name="rig" type="Panel" parent="ScrollContainer/VBoxContainer/Control12"]
-self_modulate = Color( 0.192157, 0.176471, 0.176471, 1 )
-show_behind_parent = true
-margin_left = 13.0
-margin_top = -26.0
-margin_right = 135.0
-margin_bottom = 77.0
-mouse_filter = 1
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="rig" parent="ScrollContainer/VBoxContainer/Control12" instance=ExtResource( 6 )]
+margin_left = 8.0
+margin_top = -1.0
+margin_right = 104.0
+margin_bottom = 95.0
 
 [node name="RIG" type="Panel" parent="ScrollContainer/VBoxContainer/Control12/rig"]
-margin_left = 19.0
-margin_top = 17.0
-margin_right = 95.0
-margin_bottom = 93.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 84.0
+margin_bottom = 84.0
 mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -188,5 +173,7 @@ margin_top = 600.0
 margin_bottom = 600.0
 mouse_filter = 2
 [connection signal="gui_input" from="." to="." method="_on_Inventory_gui_input"]
-[connection signal="changed_backpack" from="ScrollContainer/VBoxContainer/Control11/backpack" to="." method="_on_backpack_changed_backpack"]
-[connection signal="changed_backpack" from="ScrollContainer/VBoxContainer/Control12/rig" to="." method="_on_backpack_changed_backpack"]
+
+[editable path="ScrollContainer/VBoxContainer/Control11/backpack"]
+
+[editable path="ScrollContainer/VBoxContainer/Control12/rig"]

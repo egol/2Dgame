@@ -45,6 +45,44 @@ func insert_item(item):
 	else:
 		return false
 
+func update_item(item, size):
+	var item_pos = item.rect_position + Vector2(cell_size/2, cell_size/2)
+	
+	if item.get_parent().name == "Inventory":
+		item_pos = item.rect_global_position - self.get_global_position() + Vector2(cell_size/2, cell_size/2)
+	
+	var g_pos = pos_to_grid_coord(item_pos)
+	
+	var item_size_in_cells = get_grid_size(item)
+	
+	set_grid_space(g_pos, item_size_in_cells, false)
+	
+	item_size_in_cells.width += size.x
+	item_size_in_cells.height += size.y
+	
+	if is_grid_space_available(g_pos, item_size_in_cells):
+		if size.x > 0:
+			item.rect_size.x = item.get_child(0).rect_size.x + size.x*32
+			item.get_child(0).rect_position.x = size.x*32
+		if size.y > 0:
+			item.rect_size.y = item.get_child(0).rect_size.y + size.y*32
+			item.get_child(0).rect_position.y = size.y*16
+#		item.rect_size += size*32
+#		item.get_child(0).rect_position.x += size.x*32
+#		item.get_child(0).rect_position.y += size.y*16
+		item_size_in_cells = get_grid_size(item)
+		
+		set_grid_space(g_pos, item_size_in_cells, true)
+		if item.get_parent().name == "Inventory":
+			item.rect_global_position = Vector2(g_pos.x, g_pos.y) * cell_size + self.get_global_position()
+		else:
+			item.rect_position = Vector2(g_pos.x, g_pos.y) * cell_size
+		#checked
+		items.append(item)
+		return true
+	else:
+		return false
+
 
 func get_item(pos):
 	var item = get_item_under_pos(pos)
@@ -91,7 +129,6 @@ func get_item_under_pos(pos):
 				
 			
 #			if item.get_global_rect().has_point(pos):
-#				print(item.rect_rotation)
 #				return item
 	return null
 	
@@ -128,12 +165,17 @@ func get_grid_size(item):
 	var results = {}
 	
 	var s = item.rect_size
+	
+#	print("size", s)
+
 	var r = item.rect_rotation
 	if r == 90:
 		s.x = item.rect_size.y
 		s.y = item.rect_size.x
 	results.width = clamp(int(s.x / cell_size), 1, 500)
 	results.height = clamp(int(s.y / cell_size), 1, 500)
+	
+#	print("results", results)
 	
 	return results
 	

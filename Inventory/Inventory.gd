@@ -7,6 +7,7 @@ onready var grid_bkpk = $Stash
 onready var eq_slots = $EquipmentSlots
 onready var backpack_slot = $ScrollContainer/VBoxContainer/Control11/backpack
 onready var rig_slot = $ScrollContainer/VBoxContainer/Control12/rig
+onready var HotbarUI = get_tree().get_root().find_node("HotbarUI", true, false).get_child(0)
 
 var player_inv_list = []
 
@@ -25,6 +26,13 @@ func _ready():
 	pickup_item("ChestRig")
 	pickup_item("AI2")
 	pickup_item("SSOPatrol")
+	pickup_item("AK47")
+	pickup_item("KCIAK47")
+	pickup_item("AKGasBlock")
+	pickup_item("AKHandGuard")
+	pickup_item("AKMuzzleBreak")
+	pickup_item("AKPistolGrip")
+	pickup_item("AKStock")
 	
 	for a in range(10):
 		pickup_item("7.62x39mm")
@@ -44,15 +52,13 @@ func _on_Inventory_gui_input(event):
 			if c.has_method("insert_item"):
 				if is_instance_valid(item_held) and "amount" in item_held.data:
 					stack_similair(c)
-					
-			if c.has_method("insert_item"):
 				if is_instance_valid(item_held) and item_held.inv.size() > 0:
-					if item_held.get_child_count() > 1:
-						for i in range(item_held.inv.size()):
-							item_held.remove_child(item_held.inv[i])
-					else:
-						for i in range(item_held.inv.size()):
-							item_held.add_child(item_held.inv[i])
+#					if item_held.find_node("VBox", true, false) or item_held.find_node("VBox", true, false):
+#						for i in range(item_held.inv.size()):
+#							item_held.remove_child(item_held.inv[i])
+#					else:
+					for i in range(item_held.inv.size()):
+						item_held.add_child(item_held.inv[i])
 									
 			release(cursor_pos)
 #func _on_VBoxContainer_gui_input(event):
@@ -218,10 +224,10 @@ func grab(cursor_pos):
 			return item_held 
 
 func get_container_under_cursor(cursor_pos):
-	var containers = [backpack_slot, rig_slot, grid_bkpk, eq_slots, inv_base]
-	
+	var containers = [backpack_slot, rig_slot, grid_bkpk, eq_slots, inv_base, HotbarUI]
 	for c in player_inv_list:
 		if c.get_parent() != null:
+#			print(player_inv_list)
 			if c.get_global_rect().has_point(cursor_pos):
 				return c
 	
@@ -239,6 +245,7 @@ func release(cursor_pos):
 		return
 	
 	var c = get_container_under_cursor(cursor_pos)
+	
 	if not c:
 		drop_item()
 	elif c.has_method("insert_item"):
@@ -257,8 +264,13 @@ func release(cursor_pos):
 			change_parent(c, item_held)
 			item_held.rect_global_position = prev_pos
 			item_held = null
-		elif c.has_method("get_item_under_pos") and !dbl_clk:
-			if "amount" in item_held.data:
+		elif c.has_method("get_item_under_pos"):
+			if "temp" in item_held.data:
+				if !attach_attachment(item_held, c):
+					return_item_to_last_slot(last_inventory)
+				else:
+					item_held = null
+			elif "amount" in item_held.data:
 				if merge_item(item_held, c):
 					var prev_pos = item_held.rect_global_position
 	#				change_parent(c.get_parent(), item_held)
@@ -272,7 +284,22 @@ func release(cursor_pos):
 	else:
 		return_item_to_last_slot(last_inventory)
 		
-
+func attach_attachment(item, c):
+	var item_into = c.get_item_under_pos(get_global_mouse_position())
+	if item_into != null and is_instance_valid(item_into):
+		var item_dat = ItemDB.get_item(item.get_meta("id"))["value"]["compatible"]
+		if item_into.get_meta("id") in item_dat:
+			if c.has_method("update_item"):
+				if !c.update_item(item_into, ItemDB.get_item(item.get_meta("id"))["value"]["compatible"][item_into.get_meta("id")]["size"]):
+					return false
+			if item_into.inv[0].insert_item_without_pos(item, item_into.get_child(0).get_child(0)):
+				var prev = item.rect_position
+				change_parent(item_into.inv[0], item)
+				item.rect_position = prev
+				item = null
+				
+				return true
+	return false
 
 func split_stack(container):
 	if item_held.data["amount"]/2 > 0:
@@ -302,7 +329,7 @@ func split_stack(container):
 
 func merge_item(item, c):
 	var item_into = c.get_item_under_pos(get_global_mouse_position())
-	if item_into != null and is_instance_valid(item_into):
+	if item_into != null and is_instance_valid(item_into) and item_into.get_instance_id() != item.get_instance_id():
 		if item.get_meta("id") == item_into.get_meta("id"):
 			if item.data["amount"] + item_into.data["amount"] <= item.data["max_stack"]:
 				item_into.data["amount"] = item.data["amount"] + item_into.data["amount"]
@@ -318,17 +345,20 @@ func new_item(copy, c):
 	var item_new = item_base.instance()
 	var cursor_pos = get_global_mouse_position()
 	
+	var item_texture = item_new.get_child(0).get_child(0)
+	
 	item_new.set_meta("id", copy.get_meta("id"))
-	item_new.texture = load(item_dat["value"]["asset"])
+	item_texture.texture = load(item_dat["value"]["asset"])
 	
 #	c.get_parent().add_child(item_new)
 	c.add_child(item_new)
 	
-	item_new.expand = true
-	item_new.rect_size = item_new.rect_size*2
+	item_texture.expand = true
+	item_texture.rect_min_size = item_texture.rect_size*2
 	
 	item_new.init_item_type(item_dat["type"])
 	item_new.rect_global_position = cursor_pos + item_offset
+	item_new.rect_size = item_texture.rect_min_size
 	
 	return item_new
 	
@@ -362,17 +392,32 @@ func pickup_item(item_id):
 	
 	var item_dat = ItemDB.get_item(item_id)
 	
-	item.texture = load(item_dat["value"]["asset"])
-	item.rect_size = item.texture.get_size()
+	var item_texture = item.get_child(0).get_child(0)
+	
+	item_texture.texture = load(item_dat["value"]["asset"])
+	
+	item_texture.rect_min_size = item_texture.texture.get_size()
 	
 #	grid_bkpk.get_parent().add_child(item)
 	grid_bkpk.add_child(item)
 	
-	item.expand = true
-	item.rect_size = item.rect_size*2
+	item_texture.expand = true
+	item_texture.rect_min_size = item_texture.rect_min_size*2
+	item.rect_size = item_texture.rect_min_size
 	
 	item.init_item_type(item_dat["type"])
 	
+	if "gun" in item_dat["type"]:
+		var Slots = preload("res://Inventory/GunUI.tscn")
+		var slots = Slots.instance()
+		slots.rect_position -= Vector2(60, -40) 
+		
+		player_inv_list.append(slots)
+		item.inv.append(slots)
+		
+		add_child(slots)
+		remove_child(slots)
+		
 	if "inv" in item_dat["value"]:
 		
 		var Vbox = preload("res://Inventory/VBox.tscn")

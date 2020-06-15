@@ -2,14 +2,27 @@
 
 [ext_resource path="res://Inventory/ItemBase.gd" type="Script" id=1]
 
-[node name="ItemBase" type="TextureRect"]
+[node name="Control" type="Control"]
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemBase" type="TextureRect" parent="CenterContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label" type="Label" parent="."]
-margin_right = 8.0
 margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false

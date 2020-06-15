@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/sprite_1.png" type="Texture" id=1]
-[ext_resource path="res://Inventory/assets/guns/ak47.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/assets/guns/ak47equipped.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "IdleDown"
@@ -1815,7 +1815,7 @@ tracks/32/keys = {
 "values": [ Vector2( 0.75, 0.75 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "RunGunAK47Down"
 length = 0.8
 loop = true
@@ -2241,7 +2241,7 @@ tracks/34/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 resource_name = "RunGunAK47Left"
 length = 0.8
 loop = true
@@ -2654,8 +2654,20 @@ tracks/33/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/34/type = "value"
+tracks/34/path = NodePath("Torso/AssaultRifle:show_behind_parent")
+tracks/34/interp = 1
+tracks/34/loop_wrap = true
+tracks/34/imported = false
+tracks/34/enabled = true
+tracks/34/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "RunGunAK47Right"
 length = 0.8
 loop = true
@@ -3069,7 +3081,7 @@ tracks/33/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=9]
 resource_name = "RunGunAK47Up"
 length = 0.8
 loop = true
@@ -3495,7 +3507,7 @@ tracks/34/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 length = 0.8
 loop = true
 step = 0.2
@@ -3920,7 +3932,7 @@ tracks/34/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 length = 0.8
 loop = true
 step = 0.2
@@ -4345,8 +4357,7 @@ tracks/34/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "RunUp"
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 step = 0.2
@@ -4747,7 +4758,7 @@ tracks/32/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 resource_name = "ShootGunAK47Left"
 length = 0.8
 loop = true
@@ -5148,8 +5159,7 @@ tracks/32/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "ShootGunAK47Right"
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -5552,7 +5562,8 @@ tracks/32/keys = {
 [node name="CharacterRig" type="Node2D"]
 
 [node name="Torso" type="Sprite" parent="."]
-position = Vector2( -0.22311, -1 )
+position = Vector2( 0, -1.74673 )
+scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 48, 80, 16, 16 )
@@ -5572,24 +5583,23 @@ region_rect = Rect2( 48, 32, 16, 16 )
 
 [node name="LeftArm" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 6.00059, -4 )
-rotation = -1.73082
-scale = Vector2( -1, 1 )
+position = Vector2( 5, -1 )
+rotation = -0.261799
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 80, 48, 16, 16 )
 
 [node name="AssaultRifle" type="Sprite" parent="Torso"]
-position = Vector2( 7.00059, -4.39121 )
-rotation = -0.0522757
+position = Vector2( 4.37336, 4 )
+rotation = 0.785396
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
-region_enabled = true
 region_rect = Rect2( 48, 48, 32, 16 )
 
 [node name="RightLeg" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( 4, 11 )
+position = Vector2( 1.50655, 10.2533 )
+rotation = 0.293238
 scale = Vector2( 1, 1.00154 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -5597,14 +5607,16 @@ region_rect = Rect2( 80, 64, 16, 16 )
 
 [node name="LeftLeg" type="Sprite" parent="Torso"]
 show_behind_parent = true
-position = Vector2( -2, 11 )
+position = Vector2( -0.253273, 10.2533 )
+rotation = -0.195493
+scale = Vector2( 1, 0.931985 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 32, 64, 16, 16 )
 
 [node name="RightArm" type="Sprite" parent="Torso"]
-position = Vector2( -1.61126, -4 )
-rotation = -1.57079
+position = Vector2( -1.62664, -2 )
+rotation = -0.785396
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 32, 48, 16, 16 )
@@ -5616,12 +5628,12 @@ anims/IdleLeft = SubResource( 2 )
 anims/IdleRight = SubResource( 3 )
 anims/IdleUp = SubResource( 4 )
 anims/RunDown = SubResource( 5 )
-anims/RunGunAK47Down = SubResource( 11 )
-anims/RunGunAK47Left = SubResource( 10 )
-anims/RunGunAK47Right = SubResource( 9 )
-anims/RunGunAK47Up = SubResource( 12 )
-anims/RunLeft = SubResource( 6 )
-anims/RunRight = SubResource( 7 )
-anims/RunUp = SubResource( 8 )
-anims/ShootGunAK47Left = SubResource( 14 )
-anims/ShootGunAK47Right = SubResource( 13 )
+anims/RunGunAK47Down = SubResource( 6 )
+anims/RunGunAK47Left = SubResource( 7 )
+anims/RunGunAK47Right = SubResource( 8 )
+anims/RunGunAK47Up = SubResource( 9 )
+anims/RunLeft = SubResource( 10 )
+anims/RunRight = SubResource( 11 )
+anims/RunUp = SubResource( 12 )
+anims/ShootGunAK47Left = SubResource( 13 )
+anims/ShootGunAK47Right = SubResource( 14 )

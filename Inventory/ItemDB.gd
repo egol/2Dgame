@@ -7,6 +7,8 @@ const ICON_PATH_RIG = "res://Inventory/assets/rig/"
 const ICON_PATH_MEDICAL = "res://Inventory/assets/medical/"
 const ICON_PATH_BACKPACK = "res://Inventory/assets/backpacks/"
 const ICON_PATH_GUNS = "res://Inventory/assets/guns/"
+const ICON_PATH_MAGS = "res://Inventory/assets/mags/"
+const ICON_PATH_ATTACHMENTS = "res://Inventory/assets/attachments/"
 
 const ITEMS = {
 	"error": {
@@ -47,20 +49,87 @@ const BACKPACK = {
 	},
 }
 
+const MAGAZINE = {
+	"KCIAK47":{
+		"asset": ICON_PATH_MAGS + "ak30rdKCI.png",
+		"asset_gun": ICON_PATH_GUNS + "ak30rdKCI.png",
+		"max_cap": 30,
+		"type": "7.62x39mm",
+		"slot": "MAG",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(11, 9),
+				"size": Vector2(0, 1),
+				"show_behind": true,
+				},
+		},
+	},
+}
+
 const GUNS = {
 	"AK47": {
-		"asset": ICON_PATH_GUNS + "ak47.png",
+		"asset": ICON_PATH_GUNS + "ak47body.png",
 		"slot": "MAIN_HAND",
+		"ammo": "7.62x39mm",
+		"hotbar": true,
 	},
 }
 
 const ATTACHMENTS = {
-	"AK47": {
-		"asset": ICON_PATH_GUNS + "ak47.png",
-		"slot": "NONE",
-		"accuracy": 50,
-		"recoil": 20,
-		"ergonomics": 10,
+	"AKGasBlock": {
+		"asset": ICON_PATH_ATTACHMENTS + "akGasBlockStandard.png",
+		"asset_gun": ICON_PATH_GUNS + "akGasBlockStandard.png",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(-3, -4),
+				"size": Vector2(0, 0)
+				},
+		},
+		"slot": "GASBLOCK",
+	},
+	"AKHandGuard": {
+		"asset": ICON_PATH_ATTACHMENTS + "akHandGuardWood.png",
+		"asset_gun": ICON_PATH_GUNS + "akHandGuardWood.png",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(21, -1),
+				"size": Vector2(0, 0)
+				},
+		},
+		"slot": "HANDGUARD",
+	},
+	"AKMuzzleBreak": {
+		"asset": ICON_PATH_ATTACHMENTS + "akMuzzleBreak.png",
+		"asset_gun": ICON_PATH_GUNS + "akMuzzleBreak.png",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(53, -2),
+				"size": Vector2(0, 0)
+				},
+		},
+		"slot": "MUZZLE",
+	},
+	"AKPistolGrip": {
+		"asset": ICON_PATH_ATTACHMENTS + "akPistolGripWood.png",
+		"asset_gun": ICON_PATH_GUNS + "akPistolGripWood.png",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(-6, 7),
+				"size": Vector2(0, 1)
+				},
+		},
+		"slot": "GRIP",
+	},
+	"AKStock": {
+		"asset": ICON_PATH_ATTACHMENTS + "akStockWood.png",
+		"asset_gun": ICON_PATH_GUNS + "akStockWood.png",
+		"compatible": {
+			"AK47":{
+				"pos": Vector2(-30, 1),
+				"size": Vector2(2, 0)
+				},
+		},
+		"slot": "STOCK",
 	},
 }
 
@@ -152,8 +221,8 @@ const AMMO = {
 
 func get_item(item_id):
 	
-	var list = [AMMO, CLOTHING, MEDICAL, BACKPACK, ITEMS, RIG]
-	var list_type = ["bullets", "clothing", "medical", "backpack", "item", "rig"]
+	var list = [AMMO, CLOTHING, MEDICAL, BACKPACK, ITEMS, RIG, GUNS, MAGAZINE, ATTACHMENTS]
+	var list_type = ["bullets", "clothing", "medical", "backpack", "item", "rig", "gun", "magazine", "attachments"]
 	
 	for i in range(list.size()):
 		if item_id in list[i]:

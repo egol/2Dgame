@@ -2,7 +2,6 @@ extends Panel
 
 onready var slots = get_children()
 var items = {}
-signal changed_backpack(item)
 
 func _ready():
 	for slot in slots:
